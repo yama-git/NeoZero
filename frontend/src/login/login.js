@@ -61,7 +61,7 @@ const Login = () => {
       
       if (data !== -1) {  // 認証失敗
         setErrorMessage('');
-        document.cookie = data;
+        document.cookie = 'userid=' + data;
         navigate('/top');
       } else {  // 認証成功
         setErrorMessage('入力情報が間違っています');

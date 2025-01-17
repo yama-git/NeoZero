@@ -27,6 +27,14 @@ class UserRegisterRequest(UserLoginRequest):
     name: str
     comment: str
 
+class EmailChangeRequest(UserLoginRequest):
+    userid: str
+    new_email: str
+    
+class PassChangeRequest(UserLoginRequest):
+    userid: str
+    new_pass: str
+
 ## UserRegister
 @router.post(path="/userinfo/account/register")
 async def UserRegister(data: UserLoginRequest):
@@ -43,18 +51,6 @@ async def UserRegister(data: UserLoginRequest):
 @router.post(path="/userinfo/account/login")
 async def UserLogin(data: UserLoginRequest):
     result = await handle_db.GetConfirmConbination(data.email, data.password)
-    return result
-
-
-## GetConfirmChangeUserEmail　関数内で呼び出されるだけなのでフロントでは使われない
-@router.get(path="/userinfo/email/{user_id}")
-async def GetConfirmChangeUserEmail(user_id: str, user_email: str, new_user_email: str, user_password: str):
-    ## GetCheckConbination
-    result = await handle_db.GetConfirmConbination(user_email, user_password) 
-    if result == -1:
-        return result
-    ## GetCheckEmailDuplication
-    result = await handle_db.GetCheckEmailDuplication(new_user_email)
     return result
     
 ## GetPetInfo
@@ -87,24 +83,26 @@ async def GetPetInfo(user_id: str):
     
 ## ChangeUserEmail
 @router.put(path="/userinfo/email/change")
-async def ChangeUserEmail(user_id: str, user_email: str, new_user_email: str, user_password: str):
-    ## GetConfirmChangeUserEmail
-    result = await GetConfirmChangeUserEmail(user_id, user_email, new_user_email, user_password)
+async def ChangeUserEmail(request: EmailChangeRequest):
+    result = await handle_db.GetConfirmConbination(request.email, request.password) 
+    if result == -1:
+        return result
+    result = await handle_db.GetCheckEmailDuplication(request.new_email)
     if result == -1:
         return result
     # メールアドレス更新
-    result = await handle_db.ChangeUserEmail(user_id, new_user_email)
+    result = await handle_db.ChangeUserEmail(request.userid, request.new_email)
     return result
     
 ## ChangeUserPass
 @router.put(path="/userinfo/pass/change")
-async def ChangeUserPass(user_id: str, user_email: str, user_password: str, new_user_password: str):
+async def ChangeUserPass(request: PassChangeRequest):
     ## GetConfirmConbination
-    result = await handle_db.GetConfirmConbination(user_email, user_password)
+    result = await handle_db.GetConfirmConbination(request.email, request.password)
     if result == -1:
         return result
     # パスワード更新
-    result = await handle_db.ChangeUserPass(user_id, new_user_password)
+    result = await handle_db.ChangeUserPass(request.userid, request.new_pass)
     return result
             
 ## ChangePetInfo
@@ -133,14 +131,4 @@ async def DeleteUserAccount(user_id: str, user_email: str, user_password: str):
         return result
     result = await handle_db.DeleteUserAccount(user_id)
     return result
-   
-
-## 確認用select user list
-# @router.get(path="/user_info/api/users")
-# async def get_list_user():
-#     result = handle_db.select_all_user()
-#     return {
-#         "status": "OK",
-#         "data": result
-#     }
 

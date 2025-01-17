@@ -75,13 +75,18 @@ const ChangePass = () => {
 
     // 認証確認
     try {
-      const response = await fetch('http://localhost:8000/userinfo/email/change/{user_id}', {
-        method: 'POST',
+      const response = await fetch('http://localhost:8080/userinfo/pass/change', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         //送信情報
-        body: JSON.stringify({ nowEmail, nowPassword,newPassword }),
+        body: JSON.stringify({
+          userid: document.cookie, 
+          email: nowEmail, 
+          password: nowPassword, 
+          new_pass: newPassword
+        }),
       });
 
       const data = await response.json();

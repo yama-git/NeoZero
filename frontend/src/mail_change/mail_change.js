@@ -48,16 +48,21 @@ const MailChange = () => {
       return;
     }
 
-    //入力されてたら
-    const userid = document.cookie
+    //入力されてたら    
     try {
       const response = await fetch('http://localhost:8080/userinfo/email/change', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userid, currentEmail, newEmail, currentPassword }),
+        body: JSON.stringify({
+          userid: document.cookie, 
+          email: currentEmail, 
+          new_email: newEmail, 
+          password: currentPassword
+        }),
       });
+      
 
       const data = await response.json();
 
