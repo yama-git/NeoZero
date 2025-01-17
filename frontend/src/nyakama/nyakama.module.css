@@ -1,0 +1,173 @@
+.body {
+    min-height: 100vh; /* 高さ指定 */
+    background-color: #FFD5EC;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    margin: 0;              
+}
+
+.right {
+    flex: 1;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+}
+
+.topButton {
+    font-size: large;
+    width: 90%; 
+    height: 125px;
+    background: #ffffff;  
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;    
+}
+
+.topButton:hover {
+    background: #c3a8ca; 
+}
+
+.inquiry {
+    width: 90%; 
+    padding: 35px 0;
+    background: #ffffff;
+    margin: 0 auto;
+}
+
+.center {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    margin: 40px auto;
+    border-radius: 30px;
+    padding: 10px 0;
+    width: 50%;
+    border: solid 1px;
+    font-size: xx-large;
+    background: #ffffff;
+    color: #FFD5EC;
+}
+
+.media {
+    min-height: 650px; /* 最大高さを設定 */
+    max-height: 650px; /* 最大高さを設定 */
+    background: #b09bd1; /* 背景色 */
+    width: 90%; 
+    border: 1px solid;
+    overflow-y: auto; /* 縦方向にスクロール可能に */   
+    overflow-x: hidden;     
+}
+
+.white{
+    border: 1px solid #000; /* 枠線 */ 
+    background: #fff; /* 背景色 */
+    margin: 10px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.photo{
+    flex: 2;
+    height: 200px; /* 最大高さを設定 */
+    border: 1px solid #000; /* 枠線 */ 
+    margin: 10px;
+}
+
+.info{
+    flex: 3;
+    width: 100%;
+    display: flex;
+    flex-flow: column; /* 縦並び */
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.detail{
+    width: 100%;
+    display: flex;
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.name {
+    height: 50px;
+    width: 80%;
+    text-align: center; /* 中央揃え */
+    background: #b09bd1; /* 背景色 */
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.name:hover {
+    background: #9a88c7; /* 背景色 */
+}
+
+.refollowButton{
+    height: 50px;
+    width: 30%;
+    border: none; /* 枠線削除 */
+    cursor: pointer; /* カーソル変更 */
+    background: #FFD5EC; /* 背景色 */
+    border-radius: 30px; 
+    margin: 10px;
+}
+
+.refollowButton:hover {
+    background: #ff99cc; /* 背景色 */
+}
+
+.comment{
+    width: 90%;
+    background: #fff; /* 背景色 */
+    height: 130px;
+    border: 1px solid #000; /* 枠線 */ 
+}
+
+.advertisement {
+    width: 90%; 
+    height: 550px;
+    text-align: center;
+    border: 1px solid;
+}
+
+
+.advertisement2 {
+    width: 90%; 
+    height: 750px;
+    margin-top: 20px;    
+    text-align: center;
+    border: 1px solid;
+}
+
+.advertisement img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.advertisement2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

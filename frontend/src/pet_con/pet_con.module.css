@@ -1,0 +1,153 @@
+.body {
+    min-height: 100vh; /* 高さ指定 */
+    background-color: #FFD5EC;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    margin: 0;              
+}
+
+.right {
+    flex: 1;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
+
+.left {
+    flex: 1;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.input {
+    width: 70%;
+    height: 40px;
+    padding: 5px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: medium;
+}
+
+.topbutton {
+    font-size: large;
+    width: 90%; 
+    height: 125px;
+    background: #ffffff;  
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;    
+}
+
+.okbutton {
+    font-size: large;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;   
+    background: #ff8d78;
+    margin-top: 20px;
+    height: 60px;
+    width: 40%; 
+}
+
+.nobutton {
+    font-size: large;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;   
+    background: #789cff;
+    margin-top: 20px;
+    height: 60px;
+    width: 40%; 
+}
+
+.topbutton:hover {
+    background: #c3a8ca; 
+}
+
+.okbutton:hover {
+    background: #ff7d66;
+}
+
+.nobutton:hover {
+    background: #6b92fc;
+}
+
+.center {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start; 
+}
+
+.white{
+    background: #ffffff; 
+    font-size: x-large; /* 文字の大きさ */
+    width: 70%;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start; 
+}
+
+.con{
+    font-size: x-large;
+}
+
+.span {
+    color: red;
+}
+
+
+.account {
+    text-align: center;
+    margin: 40px auto;
+    border-radius: 30px;
+    padding: 10px 0;
+    width: 50%;
+    border: solid 1px;
+    font-size: xx-large;
+    background: #ffffff;
+    color: #FFD5EC;
+}
+
+.advertisement {
+    width: 90%; 
+    height: 550px;
+    text-align: center;
+    border: 1px solid;
+}
+
+.advertisement img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.advertisement2 {
+    width: 90%; 
+    height: 750px;
+    margin-top: 20px;    
+    text-align: center;
+    border: 1px solid;
+}
+
+.advertisement2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+::placeholder {
+    text-align: center;
+}
