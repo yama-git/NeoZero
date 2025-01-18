@@ -75,8 +75,8 @@ const ChangePass = () => {
 
     // 認証確認
     try {
-      const response = await fetch('http://localhost:8000/pass_change/pass_change', {
-        method: 'POST',
+      const response = await fetch('http://localhost:8080/userinfo/pass/change', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -92,7 +92,7 @@ const ChangePass = () => {
       const data = await response.json();
 
       if (response.ok) {
-        if (data.result !== -1) {  // 認証成功
+        if (data !== -1) {  // 認証成功
           setErrorMessage('');
           navigate('/change_info');
         } else {  // 認証失敗

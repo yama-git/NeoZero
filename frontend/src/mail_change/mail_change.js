@@ -50,8 +50,8 @@ const MailChange = () => {
 
     //入力されてたら
     try {
-      const response = await fetch('http://localhost:8000/mail_change/mail_change', {
-        method: 'POST',
+      const response = await fetch('http://localhost:8080/userinfo/email/change', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
