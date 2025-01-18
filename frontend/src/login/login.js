@@ -52,8 +52,9 @@ const Login = () => {
 
     // バックエンドへデータを送信
     try {
-      const response = await fetch('http://localhost:8000/login/login', {
+      const response = await fetch('http://localhost:8080/userinfo/account/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -61,19 +62,17 @@ const Login = () => {
       });
 
       const data = await response.json();
-
-      if (response.ok) {
-        if (data.result === 0) {  // 認証成功
-          setErrorMessage('');
-          navigate('/top');
-        } else {  // 認証失敗
-          setErrorMessage('※入力情報が間違っていますワン。');
-        }
-      } else {
-        setErrorMessage(data.error || '※ログインに失敗しましたニャン。');
+      
+      if (data !== -1) {  // 認証失敗
+        setErrorMessage('');
+        document.cookie = data;
+        navigate('/top');
+      } else {  // 認証成功
+        setErrorMessage('入力情報が間違っています');
+        return;
       }
     } catch (error) {
-      setErrorMessage('※サーバーとの通信に失敗しましたワン。');
+      setErrorMessage('サーバーとの通信に失敗しました。');
     }
   };
 
