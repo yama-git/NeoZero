@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './mail_change.module.css';
 import fontstyles from '../font/font.module.css';
-import samplePet1Img from '../image/samplePet1.png'; //259:550
-import samplePet2Img from '../image/samplePet2.png'; //259:750
+import Left1Img from '../image/Left1.png'; //259:550
+import Right1Img from '../image/Right1.png'; //259:750
 
 
 const MailChange = () => {
@@ -48,10 +48,10 @@ const MailChange = () => {
       return;
     }
 
-    //入力されてたら    
+    //入力されてたら
     try {
-      const response = await fetch('http://localhost:8080/userinfo/email/change', {
-        method: 'PUT',
+      const response = await fetch('http://localhost:8000/mail_change/mail_change', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -62,7 +62,6 @@ const MailChange = () => {
           password: currentPassword
         }),
       });
-      
 
       const data = await response.json();
 
@@ -106,8 +105,8 @@ const MailChange = () => {
         </button>
         <div className={styles.advertisement}>
           <img
-            src={samplePet1Img} // 広告サンプル
-            alt="samplePet1Img" // 代替テキスト
+            src={Left1Img} // 広告サンプル
+            alt="Left1Img" // 代替テキスト
           />
         </div>
       </div>
@@ -154,8 +153,8 @@ const MailChange = () => {
       <div className={styles.right}>
         <div className={styles.advertisement2}>
           <img
-            src={samplePet2Img} // 広告サンプル
-            alt="samplePet2Img" // 代替テキスト
+            src={Right1Img} // 広告サンプル
+            alt="Right1Img" // 代替テキスト
           />
         </div>
       </div>
