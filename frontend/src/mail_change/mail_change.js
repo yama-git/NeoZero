@@ -55,13 +55,18 @@ const MailChange = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ currentEmail, newEmail, currentPassword }),
+        body: JSON.stringify({
+          userid: document.cookie, 
+          email: currentEmail, 
+          new_email: newEmail, 
+          password: currentPassword
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        if (data.result === 0) {  // 認証成功
+        if (data !== -1) {  // 認証成功
           setErrorMessage('');
           navigate('/change_info');
         } else {  // 認証失敗

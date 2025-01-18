@@ -81,13 +81,18 @@ const ChangePass = () => {
           'Content-Type': 'application/json',
         },
         //送信情報
-        body: JSON.stringify({ nowEmail, nowPassword,newPassword }),
+        body: JSON.stringify({
+          userid: document.cookie, 
+          email: nowEmail, 
+          password: nowPassword, 
+          new_pass: newPassword
+        }), 
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        if (data.result === 0) {  // 認証成功
+        if (data.result !== -1) {  // 認証成功
           setErrorMessage('');
           navigate('/change_info');
         } else {  // 認証失敗
