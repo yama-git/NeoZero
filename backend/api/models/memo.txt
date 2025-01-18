@@ -8,18 +8,6 @@ CREATE TABLE user (
     image VARCHAR(255)
 );
 
-      // if (response.ok) {
-      //   if (data.result !== -1) {  // 認証成功
-      //     setErrorMessage('');
-      //     document.cookie = data.result;
-      //     navigate('/top');
-      //   } else {  // 認証失敗
-      //     setErrorMessage('入力情報が間違っています');
-      //   }
-      // } else {
-      //   setErrorMessage(data.error || 'ログインに失敗しました。');
-      // }
-
 
 -- Followlist テーブル
 CREATE TABLE followlist (

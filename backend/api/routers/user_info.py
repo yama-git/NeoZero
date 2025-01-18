@@ -2,7 +2,7 @@ from fastapi import APIRouter, FastAPI, Depends, Path, HTTPException, Query, Res
 import api.models.models as models
 from fastapi.middleware.cors import CORSMiddleware
 import api.cruds.user_info as handle_db
-import api.cruds.images as image_db
+import api.schemas.schemas_user_info as schema
 import datetime
 import uuid
 from pydantic import BaseModel
@@ -19,25 +19,9 @@ app.add_middleware(
     allow_headers=["*"],                       # 全ヘッダーを許可
 )
 
-class UserLoginRequest(BaseModel):
-    email: str
-    password: str
-    
-class UserRegisterRequest(UserLoginRequest):
-    name: str
-    comment: str
-
-class EmailChangeRequest(UserLoginRequest):
-    userid: str
-    new_email: str
-    
-class PassChangeRequest(UserLoginRequest):
-    userid: str
-    new_pass: str
-
 ## UserRegister
 @router.post(path="/userinfo/account/register")
-async def UserRegister(data: UserLoginRequest):
+async def UserRegister(data: schema.UserLoginRequest):
     ## GetCheckEmailDuplication
     result = await handle_db.GetCheckEmailDuplication(data.email)
     if result == 0:
@@ -49,7 +33,7 @@ async def UserRegister(data: UserLoginRequest):
 
 ## UserLogin
 @router.post(path="/userinfo/account/login")
-async def UserLogin(data: UserLoginRequest):
+async def UserLogin(data: schema.UserLoginRequest):
     result = await handle_db.GetConfirmConbination(data.email, data.password)
     return result
     
@@ -83,7 +67,7 @@ async def GetPetInfo(user_id: str):
     
 ## ChangeUserEmail
 @router.put(path="/userinfo/email/change")
-async def ChangeUserEmail(request: EmailChangeRequest):
+async def ChangeUserEmail(request: schema.EmailChangeRequest):
     result = await handle_db.GetConfirmConbination(request.email, request.password) 
     if result == -1:
         return result
@@ -96,7 +80,7 @@ async def ChangeUserEmail(request: EmailChangeRequest):
     
 ## ChangeUserPass
 @router.put(path="/userinfo/pass/change")
-async def ChangeUserPass(request: PassChangeRequest):
+async def ChangeUserPass(request: schema.PassChangeRequest):
     ## GetConfirmConbination
     result = await handle_db.GetConfirmConbination(request.email, request.password)
     if result == -1:
