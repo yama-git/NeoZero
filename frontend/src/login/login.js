@@ -46,11 +46,14 @@ const Login = () => {
       setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいニャン。');
       return;
     }
+    //処理とおさない用
+    navigate('/top');
     
+
+    // バックエンドへデータを送信
     try {
-      const response = await fetch('http://localhost:8080/userinfo/account/login', {
+      const response = await fetch('http://localhost:8000/login/login', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -58,21 +61,22 @@ const Login = () => {
       });
 
       const data = await response.json();
-      
-      if (data !== -1) {  // 認証失敗
-        setErrorMessage('');
-        document.cookie = data;
-        navigate('/top');
-      } else {  // 認証成功
-        setErrorMessage('入力情報が間違っています');
-        return;
+
+      if (response.ok) {
+        if (data.result === 0) {  // 認証成功
+          setErrorMessage('');
+          navigate('/top');
+        } else {  // 認証失敗
+          setErrorMessage('※入力情報が間違っていますワン。');
+        }
+      } else {
+        setErrorMessage(data.error || '※ログインに失敗しましたニャン。');
       }
     } catch (error) {
-      setErrorMessage('サーバーとの通信に失敗しました。');
+      setErrorMessage('※サーバーとの通信に失敗しましたワン。');
     }
   };
 
-  
   const handleRegister = () => {
     navigate('/terms');
   };
