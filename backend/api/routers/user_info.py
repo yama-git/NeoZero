@@ -2,10 +2,9 @@ from fastapi import APIRouter, FastAPI, Depends, Path, HTTPException, Query, Res
 import api.models.models as models
 from fastapi.middleware.cors import CORSMiddleware
 import api.cruds.user_info as handle_db
-import api.schemas.schemas_user_info as schema
+import api.schemas.user_info as schema
 import datetime
 import uuid
-from pydantic import BaseModel
 
 app = FastAPI()
 router = APIRouter()
@@ -21,15 +20,14 @@ app.add_middleware(
 
 ## UserRegister
 @router.post(path="/userinfo/account/register")
-async def UserRegister(data: schema.UserLoginRequest):
+async def UserRegister(data: schema.UserRegisterRequest):
     ## GetCheckEmailDuplication
     result = await handle_db.GetCheckEmailDuplication(data.email)
     if result == 0:
         result = await handle_db.UserRegister(data.name, data.email, data.password, data.comment)
         if result == 0:
             return 0
-        else:
-            return -1
+    return -1
 
 ## UserLogin
 @router.post(path="/userinfo/account/login")
@@ -38,7 +36,7 @@ async def UserLogin(data: schema.UserLoginRequest):
     return result
     
 ## GetPetInfo
-@router.get(path="/userinfo/info/{user_id}")
+@router.get(path="/userinfo/info/pet")
 async def GetPetInfo(user_id: str):
     result = handle_db.GetPetInfo(user_id)
     ###########
@@ -90,8 +88,8 @@ async def ChangeUserPass(request: schema.PassChangeRequest):
     return result
             
 ## ChangePetInfo
-@router.put(path="/userinfo/info/change/{user_id}")
-async def ChangePetInfo(user_id: str, user_name: str = Query(None), user_comment: str = Query(None), user_icon: str = Query(None)):
+@router.put(path="/userinfo/info/change}")
+async def ChangePetInfo(user_id: str, user_name: str = Query(None), user_comment: str = Query(None)):
     result = handle_db.ChangePetInfo(user_id, user_name, user_comment)
     #####
     return result

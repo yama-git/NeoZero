@@ -14,7 +14,7 @@ const AccountReg = () => {
   const [comment, setComment] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleOk = () => {
+  const handleOk =async () => {
     const passwordRegex = /^[a-zA-Z0-9]{8,16}$/; // パスワードの形式チェック
 
     if (!email || !name || !password || !passwordConfirm) {
@@ -37,9 +37,35 @@ const AccountReg = () => {
       return;
     }
 
-    setErrorMessage("");
-    navigate('/'); // ログインページに移動
+    //入力されてたら
+    try {
+      const response = await fetch('http://localhost:8080/userinfo/account/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({name, email, password, comment}),
+      });
+      
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data !== -1) {  // 認証成功
+          setErrorMessage('');
+          navigate('/');
+        } else {  // 認証失敗
+          setErrorMessage('※入力情報が間違っていますニャン。');
+        }
+      } else {
+        setErrorMessage(data.error || '※ログインに失敗しましたワン。');
+      }
+    } catch (error) {
+      setErrorMessage('※サーバーとの通信に失敗しましたニャン。');
+    }
   };
+
+
+
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
   };
