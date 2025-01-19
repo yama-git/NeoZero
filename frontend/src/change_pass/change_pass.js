@@ -74,6 +74,14 @@ const ChangePass = () => {
     }
 
     // 認証確認
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return '';
+    };
+    
+    const userid = getCookie('userid');
     try {
       const response = await fetch('http://localhost:8080/userinfo/pass/change', {
         method: 'PUT',
@@ -82,7 +90,7 @@ const ChangePass = () => {
         },
         //送信情報
         body: JSON.stringify({
-          userid: document.cookie, 
+          userid: userid, 
           email: nowEmail, 
           password: nowPassword, 
           new_pass: newPassword

@@ -46,9 +46,6 @@ const Login = () => {
       setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいニャン。');
       return;
     }
-    //処理とおさない用
-    navigate('/top');
-    
 
     // バックエンドへデータを送信
     try {
@@ -65,7 +62,7 @@ const Login = () => {
       
       if (data !== -1) {  // 認証失敗
         setErrorMessage('');
-        document.cookie = data;
+        document.cookie = "userid=" + data + "; max-age=3600;"; // 有効期限を追加
         navigate('/top');
       } else {  // 認証成功
         setErrorMessage('入力情報が間違っています');

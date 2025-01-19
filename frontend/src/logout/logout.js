@@ -14,6 +14,7 @@ const Logout = () => {
   };
 
   const handleok = () => { //「 はい」ボタン押下 
+    document.cookie = "userid=; max-age=0;";
     navigate('/'); // はいのページ
   };
 
