@@ -40,7 +40,7 @@ async def Follow(following, followed):
     return 0
 
 ## ChangeFlag（0:フォロー解除中, 1:フォロー中）
-async def ChangeFlag(following, followed, check):
+async def ChangeFlag(following, followed):
     session = databases.create_new_session()
     follow = session.query(models.Followlist).\
                 filter(models.Followlist.following == following, 
@@ -48,10 +48,8 @@ async def ChangeFlag(following, followed, check):
                 first()
     if follow == None:
         return -1 
-    elif check == 0:
-        follow.flag = 1
-    elif check == 1:
-        follow.flag = 0
+    else:
+        follow.flag = not follow.flag
     session.commit()
     return 0
 

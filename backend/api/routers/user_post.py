@@ -107,7 +107,7 @@ async def DeletePost(user_id: str, post_id: str):
 #     return result
 
 ## Good
-@router.put(path="/post/good/{post_id}")
-async def Good(post_id: str):
-    result = await handle_db.Good(post_id)
-    return result
+# @router.put(path="/post/good/{post_id}")
+# async def Good(post_id: str):
+#     result = await handle_db.Good(post_id)
+#     return result

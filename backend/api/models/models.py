@@ -23,6 +23,15 @@ class Followlist(base):
     user_following = relationship("User", foreign_keys=[following], back_populates="following")
     user_followed = relationship("User", foreign_keys=[followed], back_populates="followed_by")
 
+
+class Good(base):
+    __tablename__ = 'good'
+    user_id = Column(CHAR(36), ForeignKey("user.id"))  # 型を一致させる
+    post_id = Column(CHAR(36), ForeignKey("post.id"))
+    flag = Column(Boolean, default=True)
+    user = relationship("User", back_populates="good")
+    post = relationship("Post", back_populates="good")
+
 class User(base):
     __tablename__ = 'user'
     id = Column(CHAR(36), primary_key=True)
@@ -31,6 +40,7 @@ class User(base):
     password = Column(VARCHAR(64))
     comment = Column(VARCHAR(100))
     image = Column(VARCHAR(255))
+    good = relationship("Good", back_populates="user")
     post = relationship("Post", back_populates="user")
     report = relationship("Report", back_populates="user")
     following = relationship(
@@ -59,6 +69,7 @@ class Post(base):
     image = Column(VARCHAR(255))
     user_id = Column(CHAR(36), ForeignKey("user.id"))  # 型を一致させる
     user = relationship("User", back_populates="post")
+    good = relationship("Good", back_populates="post")
 
     def __init__(self):
         self.id = str(uuid.uuid4())

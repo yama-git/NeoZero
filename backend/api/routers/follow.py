@@ -26,7 +26,7 @@ async def Follow(following: str, followed: str):
     elif check == -1:
         return -1
     else:
-        result = await handle_db.ChangeFlag(following, followed, check)
+        result = await handle_db.ChangeFlag(following, followed)
     return result
 
 ## GetFollow フォローリストをとってくる
