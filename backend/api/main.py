@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 
-from api.routers import user_info, user_post, report, admin, corp_info, follow
+from api.routers import user_info, user_post, report, admin, corp_info, follow, good
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()

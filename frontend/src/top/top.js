@@ -30,20 +30,27 @@ const TopPage = () => {
 
 const handleGood = async (postId) => {
 //いいねしたポストIDの送信
- /* try {
-
+  try {
     // POSTリクエストを送信
     const response = await fetch('http://localhost:8080/post/good', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userid, postId),
+      body: JSON.stringify({userid, postid: postId}),
     });
 
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('エラー:', response.status, errorData);
+      return;
+    }
+
+    
     // レスポンスの処理
     const data = await response.json();
-    if (response == 1) {
+    if (data === 1) {
       // 成功した場合、ボタンを無効にする
       setIsLiked(true);
       console.log('送信成功:', data);
@@ -55,7 +62,7 @@ const handleGood = async (postId) => {
   } catch (error) {
     // 通信エラーなどのエラーハンドリング
     console.error('通信エラー:', error);
-  } */
+  }
 };
 
     
@@ -146,7 +153,7 @@ const handleGood = async (postId) => {
                 <div className={styles.post}>
                   <div className={styles.picture}>
                     <img
-                      src={`http://localhost:8000/${post.image_url}`} // 修正された部分
+                      src={`http://localhost:8080/${post.image_url}`} // 修正された部分
                       alt={`投稿 ${post.id}`}
                       className={styles.postImage}
                       onError={(e) => {
@@ -170,9 +177,10 @@ const handleGood = async (postId) => {
                         className={styles.good}
                         onClick={() => handleGood(post.id)} 
                         style={inputStyle}
-                        disabled={post.good !== 0} // 0以外の場合にボタンが無効になる
+                        disabled={isLiked === 1} // 0以外の場合にボタンが無効になる
                       >
-                    {post.good === 0 ? "いいね" : "いいね済み"} 
+                    {/* {post.good === 0 ? "いいね済み" : "いいね"}  */}
+                    {isLiked === 0 ? 'いいね済み' : 'いいね'}
                       </button>
                       <div className={styles.money}>スパチャ</div>
                     </div>

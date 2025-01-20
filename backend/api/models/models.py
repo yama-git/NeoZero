@@ -26,6 +26,7 @@ class Followlist(base):
 
 class Good(base):
     __tablename__ = 'good'
+    id = Column(CHAR(36), primary_key=True)
     user_id = Column(CHAR(36), ForeignKey("user.id"))  # 型を一致させる
     post_id = Column(CHAR(36), ForeignKey("post.id"))
     flag = Column(Boolean, default=True)

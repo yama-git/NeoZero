@@ -3,7 +3,7 @@ import api.models.models as models
 from fastapi.middleware.cors import CORSMiddleware
 import api.cruds.images as image_db
 import api.cruds.user_post as handle_db
-import datetime
+import api.schemas.user_post as schema
 
 app = FastAPI()
 router = APIRouter()
@@ -20,8 +20,8 @@ app.add_middleware(
 
 ## Post
 @router.post(path="/post")
-async def Post(user_id: str, image: str, title: str = Query(None), caption: str = Query(None)):
-    postid = handle_db.Post(user_id, title, caption)
+async def Post(data: schema.PostRequest):
+    postid = handle_db.Post(data.userid, data.title, data.caption)
     return postid
     # if postid == -1:
     #     return -1
@@ -67,10 +67,10 @@ async def GetNewPost():
         return -1
     posts = [
         {
-            "title": post.title,
-            "caption": post.caption,
-            "goodcount": post.goodcount,
-            "postid": post.image
+            "id": post.id,
+            "image_url": post.image,
+            "comment": post.caption
+            # "good": 
         }
         for post in result
     ]
