@@ -42,4 +42,8 @@ async def ExclusionViolationUser(user_id: str):
     result = handle_db.DeleteReport(user_id)
     return result
 
-
+##　ReportPost
+@router.get(path="/report/post")
+async def ReportPost(postid: str):
+    result = await handle_db.ReportPost(postid)
+    return result

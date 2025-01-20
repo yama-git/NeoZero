@@ -61,3 +61,20 @@ def DeleteReport(user_id):
     session.commit()
     return 0
     
+## ReportPost
+async def ReportPost(postid):
+    session = databases.create_new_session()
+    post = session.query(models.Post).\
+                    filter(models.Post.id == postid).\
+                    first()   
+    user = session.query(models.User).\
+                    filter(models.User.id == post.user_id).\
+                    first()               
+    if post == None:
+        return -1
+    else:
+        return {
+            "name": user.name,
+            "comment": post.caption,
+            "image": post.image
+    }
