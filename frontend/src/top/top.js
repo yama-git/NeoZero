@@ -30,8 +30,7 @@ const TopPage = () => {
     if (!userid || !postId) return 1;
 
     try {
-      const response = await fetch(`http://localhost:8080/post/goodstatus?userid=${userid}&postid=${postId}`);
-
+      const response = await fetch(`http://localhost:8080/post/goodstatus/${userid}/${postId}`);
       if (!response.ok) {
         throw new Error('いいね状態の取得に失敗しました');
       }
@@ -44,7 +43,7 @@ const TopPage = () => {
     }
   }, [userid]);
 
-  const handleGood = async (postId) => {
+  const handleGood = useCallback(async (postId) => {
     if (!userid || !postId) return;
 
     try {
@@ -74,66 +73,65 @@ const TopPage = () => {
         });
       });
 
-
     } catch (error) {
       console.error('いいね処理エラー:', error);
     }
-  };
+  }, [userid]);
 
   // 以下フォロー用の関数
   const fetchFollowStatus = useCallback(async (postId) => {
-      if (!userid || !postId) return 1;
-  
-      try {
-        const response = await fetch(`http://localhost:8080/post/followstatus?userid=${userid}&postid=${postId}`);
-  
-        if (!response.ok) {
-          throw new Error('いいね状態の取得に失敗しました');
-        }
-  
-        const status = await response.json();
-        return status;
-      } catch (error) {
-        console.error('いいね状態取得エラー:', error);
-        return 1;
+    if (!userid || !postId) return 1;
+
+    try {
+      const response = await fetch(`http://localhost:8080/post/followstatus/${userid}/${postId}`);
+
+      if (!response.ok) {
+        throw new Error('フォロー状態の取得に失敗しました');
       }
-    }, [userid]);
-  
-  const handleFollow = async (postId) => {
+
+      const status = await response.json();
+      return status;
+    } catch (error) {
+      console.error('フォロー状態取得エラー:', error);
+      return 1;
+    }
+  }, [userid]);
+
+  const handleFollow = useCallback(async (postId) => {
     if (!userid || !postId) return;
-      try {
-        // POSTリクエストを送信
-        const response = await fetch('http://localhost:8080/follow', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({userid, postid: postId}),
-        });
-        
-        if (!response.ok) {
-          throw new Error('いいねの更新に失敗しました');
-        }
-  
-        // 現在の投稿のいいね状態を反転させる（0 → 1 または 1 → 0）
-        setPosts(prevPosts => {
-          return prevPosts.map(post => {
-            if (post.id === postId) {
-              if (post.isFollowed === 1) {
-                return { ...post, isFollowed: 0 };  // いいねしていれば、いいねを解除
-              } else {
-                return { ...post, isFollowed: 1 };  // いいねしていなければ、いいねする
-              }
-            }
-            return post;
-          });
-        });
-  
-  
-      } catch (error) {
-        console.error('いいね処理エラー:', error);
+
+    try {
+      // POSTリクエストを送信
+      const response = await fetch('http://localhost:8080/follow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid, postid: postId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('フォローの更新に失敗しました');
       }
-    };
+
+      // 現在の投稿のフォロー状態を反転させる（0 → 1 または 1 → 0）
+      setPosts(prevPosts => {
+        return prevPosts.map(post => {
+          if (post.id === postId) {
+            if (post.isFollowed === 1) {
+              return { ...post, isFollowed: 0 };  // フォローしていれば、フォローを解除
+            } else {
+              return { ...post, isFollowed: 1 };  // フォローしていなければ、フォローする
+            }
+          }
+          return post;
+        });
+      });
+
+    } catch (error) {
+      console.error('フォロー処理エラー:', error);
+    }
+  }, [userid]);
 
   const handleMypage = () => {
     navigate('/mypage');
@@ -167,17 +165,19 @@ const TopPage = () => {
         }
         const data = await response.json();
 
-        const postsWithLikeStates = await Promise.all(
+        const postsWithStatuses = await Promise.all(
           data.posts.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.id);
+            const followStatus = await fetchFollowStatus(post.id);
             return {
               ...post,
-              isLiked: goodStatus
+              isLiked: goodStatus,
+              isFollowed: followStatus
             };
           })
         );
 
-        setPosts(postsWithLikeStates);
+        setPosts(postsWithStatuses);
       } catch (error) {
         console.error('Error fetching posts:', error);
         setError(error.message);
@@ -187,7 +187,7 @@ const TopPage = () => {
     };
 
     fetchPosts();
-  }, [userid, fetchGoodStatus]); // 依存配列にuseridとfetchGoodStatusを追加
+  }, [userid, fetchGoodStatus, fetchFollowStatus]); // 依存配列にfetchGoodStatusとfetchFollowStatusを追加
 
   if (isLoading) {
     return <div className={styles.loading}>読み込み中...</div>;
@@ -197,123 +197,108 @@ const TopPage = () => {
     return <div className={styles.error}>エラー: {error}</div>;
   }
 
-
-
-return (
-  <div className={fontstyles.fontFamily}>
-    <div className={styles.body}>
-      <div className={styles.above}>
-        <img
-          src={pawloverslogoImg}
-          alt="PawLovers"
-          className={styles.pawloverslogoImg}
-        />
-
-        <button
-          className={styles.postButton}
-          onClick={handlePost}
-          style={inputStyle}
-        >
-          投稿する
-        </button>
-
-        <button
-          className={styles.mypageButton}
-          onClick={handleMypage}
-          style={inputStyle}
-        >
-          マイページ
-        </button>
-      </div>
-
-      <div className={styles.bottom}>
-        <div className={styles.advertisement}>
+  return (
+    <div className={fontstyles.fontFamily}>
+      <div className={styles.body}>
+        <div className={styles.above}>
           <img
-            src={TopleftImg}
-            alt="広告"
+            src={pawloverslogoImg}
+            alt="PawLovers"
+            className={styles.pawloverslogoImg}
           />
+
+          <button
+            className={styles.postButton}
+            onClick={handlePost}
+            style={inputStyle}
+          >
+            投稿する
+          </button>
+
+          <button
+            className={styles.mypageButton}
+            onClick={handleMypage}
+            style={inputStyle}
+          >
+            マイページ
+          </button>
         </div>
 
-        <div className={styles.media}>
-          {posts.map((post) => (
-            <div key={post.id} className={styles.white}>
-              <div className={styles.post}>
-                <div className={styles.picture}>
-                  <img
-                    src={`http://localhost:8080/${post.image_url}`} // 修正された部分
-                    alt={`投稿 ${post.id}`}
-                    className={styles.postImage}
-                    onError={(e) => {
-                      e.target.src = '/placeholder.png';
-                      console.error('画像の読み込みに失敗しました');
-                    }}
-                  />
-                </div>
+        <div className={styles.bottom}>
+          <div className={styles.advertisement}>
+            <img
+              src={TopleftImg}
+              alt="広告"
+            />
+          </div>
 
-                <div className={styles.info}>
-                  <button
-                    className={styles.followButton}
-                    onClick={() => handleFollow(post.id)}
-                    style={inputStyle} 
-                  >
-                {(() => {
-                          if (post.isFollowed === 0) {
-                            return 'フォロー中';
-                          } else {
-                            return 'フォロー';
-                          }
-                        })()}
-                  </button>
-
-                  <div className={styles.push}>
-                    <button
-                      className={styles.good}
-                      onClick={() => handleGood(post.id)} //post.idを取得
-                      style={inputStyle}
-                    >
-                  {(() => {
-                          if (post.isLiked === 0) {
-                            return 'いいね済み';
-                          } else {
-                            return 'いいね';
-                          }
-                        })()}
-                    </button>
-
-                    <button
-                    className={styles.good}
-                    onClick={handlesuperchat}
-                    style={inputStyle}
-                  >
-                    スパチャ
-                  </button>
-              
+          <div className={styles.media}>
+            {posts.map((post) => (
+              <div key={post.id} className={styles.white}>
+                <div className={styles.post}>
+                  <div className={styles.picture}>
+                    <img
+                      src={`http://localhost:8080/${post.image_url}`} // 修正された部分
+                      alt={`投稿 ${post.id}`}
+                      className={styles.postImage}
+                      onError={(e) => {
+                        e.target.src = '/placeholder.png';
+                        console.error('画像の読み込みに失敗しました');
+                      }}
+                    />
                   </div>
 
-                  <div className={styles.comment}>{post.comment}</div>
-                  <button
-                    className={styles.reportButton}
-                    onClick={handleReport}
-                    style={inputStyle}
-                  >
-                    通報
-                  </button>
+                  <div className={styles.info}>
+                    <button
+                      className={styles.followButton}
+                      onClick={() => handleFollow(post.id)}
+                      style={inputStyle} 
+                    >
+                      {post.isFollowed === 0 ? 'フォロー中' : 'フォロー'}
+                    </button>
+
+                    <div className={styles.push}>
+                      <button
+                        className={styles.good}
+                        onClick={() => handleGood(post.id)} //post.idを取得
+                        style={inputStyle}
+                      >
+                        {post.isLiked === 0 ? 'いいね済み' : 'いいね'}
+                      </button>
+
+                      <button
+                        className={styles.good}
+                        onClick={handlesuperchat}
+                        style={inputStyle}
+                      >
+                        スパチャ
+                      </button>
+                    </div>
+
+                    <div className={styles.comment}>{post.comment}</div>
+                    <button
+                      className={styles.reportButton}
+                      onClick={handleReport}
+                      style={inputStyle}
+                    >
+                      通報
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className={styles.advertisement}>
-          <img
-            src={ToprightImg}
-            alt="広告"
-          />
+          <div className={styles.advertisement}>
+            <img
+              src={ToprightImg}
+              alt="広告"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default TopPage;

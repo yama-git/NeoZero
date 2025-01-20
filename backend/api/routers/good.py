@@ -29,7 +29,7 @@ async def Good(data: schema.GoodRequest):
     return result
 
 ## GoodStatus
-@router.get(path="/post/goodstatus")
-async def GoodStatus(data: schema.GoodRequest):
-    result = await handle_db.GoodStatus(data.userid, data.postid)
+@router.get(path="/post/goodstatus/{userid}/{postId}")
+async def GoodStatus(userid: str, postId: str):
+    result = await handle_db.GoodStatus(userid, postId)
     return result

@@ -67,13 +67,15 @@ async def ChangeFlag(following, followed):
 async def GetFollow(user_id):
     session = databases.create_new_session()
     user = session.query(models.Followlist).\
-                filter(models.Followlist.following == user_id).\
-                all()      
+                filter(models.Followlist.following == user_id, models.Followlist.flag == 1).\
+                all()
     if user == None:
         return -1
     user_data = []
     for follow in user:
-        followed_user = session.query(models.User).filter(models.User.id == follow.followed).first()
+        followed_user = session.query(models.User).\
+                filter(models.User.id == follow.followed).\
+                first()
         if followed_user:
             user_data.append({
                 "name": followed_user.name,
