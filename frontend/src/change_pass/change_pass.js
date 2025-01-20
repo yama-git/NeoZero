@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // ページ遷移用
 import styles from './change_pass.module.css'; // CSSモジュール(cssファイルかく)
 import fontstyles from '../font/font.module.css';
-import samplePet1Img from '../image/samplePet1.png'; //259:550
-import samplePet2Img from '../image/samplePet2.png'; //259:750
+import Left1Img from '../image/Left1.png'; //259:550
+import Right1Img from '../image/Right1.png'; //259:750
 
 
 const ChangePass = () => {
@@ -75,8 +75,8 @@ const ChangePass = () => {
 
     // 認証確認
     try {
-      const response = await fetch('http://localhost:8080/userinfo/pass/change', {
-        method: 'PUT',
+      const response = await fetch('http://localhost:8000/pass_change/pass_change', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -86,13 +86,13 @@ const ChangePass = () => {
           email: nowEmail, 
           password: nowPassword, 
           new_pass: newPassword
-        }),
+        }), 
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        if (data !== -1) {  // 認証成功
+        if (data.result !== -1) {  // 認証成功
           setErrorMessage('');
           navigate('/change_info');
         } else {  // 認証失敗
@@ -129,8 +129,8 @@ const ChangePass = () => {
 
           <div className={styles.advertisement}>
             <img
-              src={samplePet1Img} // 広告サンプル
-              alt="samplePet1Img" // 代替テキスト
+              src={Left1Img} // 広告サンプル
+              alt="Left1Img" // 代替テキスト
             />
           </div>
         </div>
@@ -200,8 +200,8 @@ const ChangePass = () => {
         <div className={styles.right}>
           <div className={styles.advertisement2}>
             <img
-              src={samplePet2Img} // 広告サンプル
-              alt="samplePet2Img" // 代替テキスト
+              src={Right1Img} // 広告サンプル
+              alt="Right1Img" // 代替テキスト
             />
           </div>
         </div>

@@ -46,7 +46,11 @@ const Login = () => {
       setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいニャン。');
       return;
     }
+    //処理とおさない用
+    navigate('/top');
     
+
+    // バックエンドへデータを送信
     try {
       const response = await fetch('http://localhost:8080/userinfo/account/login', {
         method: 'POST',
@@ -72,7 +76,6 @@ const Login = () => {
     }
   };
 
-  
   const handleRegister = () => {
     navigate('/terms');
   };
