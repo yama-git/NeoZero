@@ -7,5 +7,5 @@ class FollowRequest(BaseModel):
 
 class FollowStatusRequest(BaseModel):
     userid: str
-    postid: str
+    followedid: str
 

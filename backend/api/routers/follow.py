@@ -21,18 +21,17 @@ app.add_middleware(
 ## Follow & UnFollow
 @router.post(path="/follow")
 async def Follow(data: schema.FollowStatusRequest):
-    followed = await handle_db.Followed(data.postid)
-    check = await handle_db.GetConfirmConbination(data.userid, followed)
+    check = await handle_db.GetConfirmConbination(data.userid, data.followedid)
     if check == "None":
-        result = await handle_db.Follow(data.userid, followed)
+        result = await handle_db.Follow(data.userid, data.followedid)
     elif check == -1:
         return -1
     else:
-        result = await handle_db.ChangeFlag(data.userid, followed)
+        result = await handle_db.ChangeFlag(data.userid, data.followedid)
     return result
 
 ## Nyakama内でUnFollow
-@router.post(path="/unfollow")
+@router.put(path="/unfollow")
 async def Follow(data: schema.FollowRequest):
     followed = await handle_db.Followed(data.followid)
     check = await handle_db.GetConfirmConbination(data.userid, followed)
@@ -45,9 +44,9 @@ async def Follow(data: schema.FollowRequest):
     return result
 
 ## GetFollow フォローリストをとってくる
-@router.get(path="/followlist")
-async def GetFollow(user_id: str):
-    result = await handle_db.GetFollow(user_id)
+@router.get(path="/followlist/{userid}")
+async def GetFollow(userid: str):
+    result = await handle_db.GetFollow(userid)
     if result == -1:
         return -1
     # GetIconを呼び出す

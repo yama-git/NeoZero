@@ -97,41 +97,44 @@ const TopPage = () => {
     }
   }, [userid]);
 
-  const handleFollow = useCallback(async (postId) => {
-    if (!userid || !postId) return;
-
+  const handleFollow = useCallback(async (followedid) => {
+    if (!userid || !followedid) return;
+  
     try {
-      // POSTリクエストを送信
       const response = await fetch('http://localhost:8080/follow', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userid, postid: postId }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userid, followedid }),
       });
-
+  
       if (!response.ok) {
         throw new Error('フォローの更新に失敗しました');
       }
-
-      // 現在の投稿のフォロー状態を反転させる（0 → 1 または 1 → 0）
-      setPosts(prevPosts => {
-        return prevPosts.map(post => {
-          if (post.id === postId) {
-            if (post.isFollowed === 1) {
-              return { ...post, isFollowed: 0 };  // フォローしていれば、フォローを解除
-            } else {
-              return { ...post, isFollowed: 1 };  // フォローしていなければ、フォローする
-            }
+  
+      // let followedUserId = null;
+  
+      // フォロー状態の反転処理
+      setPosts((prevPosts) => {
+        return prevPosts.map((post) => {
+  
+          // 同じユーザーが投稿した他の投稿にも反映
+          if (post.userid === followedid) {
+            return {
+              ...post,
+              isFollowed: post.isFollowed === 0 ? 1 : 0, // フォロー状態を反転
+            };
           }
+  
           return post;
         });
       });
-
+  
     } catch (error) {
       console.error('フォロー処理エラー:', error);
     }
   }, [userid]);
+  
+
 
   const handleMypage = () => {
     navigate('/mypage');
@@ -164,7 +167,6 @@ const TopPage = () => {
           throw new Error('投稿の取得に失敗しました');
         }
         const data = await response.json();
-
         const postsWithStatuses = await Promise.all(
           data.posts.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.id);
@@ -251,10 +253,10 @@ const TopPage = () => {
                   <div className={styles.info}>
                     <button
                       className={styles.followButton}
-                      onClick={() => handleFollow(post.id)}
+                      onClick={() => handleFollow(post.userid)}
                       style={inputStyle} 
                     >
-                      {post.isFollowed === 0 ? 'フォロー中' : 'フォロー'}
+                      {post.isFollowed ? 'フォロー中' : 'フォロー'}
                     </button>
 
                     <div className={styles.push}>
@@ -263,7 +265,7 @@ const TopPage = () => {
                         onClick={() => handleGood(post.id)} //post.idを取得
                         style={inputStyle}
                       >
-                        {post.isLiked === 0 ? 'いいね済み' : 'いいね'}
+                        {post.isLiked ? 'いいね済み' : 'いいね'}
                       </button>
 
                       <button

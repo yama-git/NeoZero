@@ -40,7 +40,7 @@ async def GetNewPost():
     posts = session.query(models.Post).\
                 order_by(models.Post.create_date_time.desc()).\
                 limit(10).\
-                all()     
+                all()  
     if posts == None:
         posts = -1
     return posts

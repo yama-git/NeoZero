@@ -69,7 +69,8 @@ async def GetNewPost():
         {
             "id": post.id,
             "image_url": post.image,
-            "comment": post.caption
+            "comment": post.caption,
+            "userid": post.user_id
             # "good": 
         }
         for post in result
