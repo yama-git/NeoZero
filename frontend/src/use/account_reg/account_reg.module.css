@@ -1,0 +1,99 @@
+.body {
+    min-height: 100vh; /* 高さ指定 */
+    text-align: center; /* 中央揃え */
+    font-size: medium; /* 文字の大きさ */
+    background: #FFD5EC; /* 背景色 */
+    display: flex;
+    flex-flow: column; /* 縦並び */
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.form{
+    width: 60%   
+}
+
+.title {
+    width: 50%;
+    margin: 40px auto;
+    border-radius: 30px;
+    font-size: xx-large;
+    background: #ffffff;
+    color: #FFD5EC;
+    padding: 10px 0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.item label {
+    font-size: large;
+    padding: 10px;
+    background: #b09bd1;
+    border-radius: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+.item input {
+    width: 60%;
+    height: 35px;
+    padding: 5px;
+    font-size: medium;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.item textarea {
+    width: 60%;           
+    height: 100px;        
+    padding: 5px;         
+    font-size: medium;     
+    border: 1px solid #000; 
+    border-radius: 5px;    
+    resize: none;         
+}
+
+.comment {
+    height: 100px;
+}
+
+.item span {
+    color: red;
+}
+
+.note {
+    text-align: right;
+    padding-right: 4%;
+    font-size: smaller;
+    color: #777;
+}
+
+.errorMessage{
+    height: 20px;
+    color: red;
+}
+
+.okButton {
+    font-size: xx-large;
+    background: #ffffff;
+    padding: 10px;
+    color: #FFD5EC;
+    width: 30%;
+    border-radius: 30px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.okButton:hover {
+    background: #c3a8ca;
+}
+
+.item label::placeholder {
+    text-align: center;
+}

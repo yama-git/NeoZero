@@ -1,0 +1,60 @@
+.body {
+    min-height: 100vh;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.term {
+    width: 50%;
+    margin: 40px auto;
+    border-radius: 30px;
+    font-size: xx-large;
+    border: solid 1px #000;
+    color: #FFD5EC;
+    padding: 10px 0;
+}
+
+.context {
+    background: #99CCCC;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.button {
+    height: 80px;
+    width: 80%;
+    border-radius: 30px;
+    background: #FFD5EC;
+    font-size: large;
+    color: #000000;
+    margin: 20px 0;
+    border: none;
+    cursor: pointer;
+}
+
+.use {
+    height: 20px;
+    width: 80%;
+    border-radius: 30px;
+    background: #99CCCC;
+    font-size: large;
+    color: #000000;
+    margin: 20px 0;
+    border: none;
+    cursor: pointer;
+}
+
+.use:hover {
+    background: #cbe1e1;
+}
+
+.button:hover {
+    background: #ff99cc;
+}
+
+.pawloversLogo {
+    width: 60%;
+    margin-top: 20px;
+}
