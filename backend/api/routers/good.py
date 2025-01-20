@@ -28,8 +28,8 @@ async def Good(data: schema.GoodRequest):
         result = await handle_db.ChangeFlag(data.userid, data.postid)
     return result
 
-## Good
+## GoodStatus
 @router.get(path="/post/goodstatus")
-async def Good(data: schema.GoodRequest):
+async def GoodStatus(data: schema.GoodRequest):
     result = await handle_db.GoodStatus(data.userid, data.postid)
     return result

@@ -3,6 +3,7 @@ import api.models.models as models
 from fastapi.middleware.cors import CORSMiddleware
 import api.cruds.follow as handle_db
 import api.cruds.images as image_db
+import api.schemas.follow as schema
 import datetime
 
 app = FastAPI()
@@ -19,14 +20,15 @@ app.add_middleware(
 
 ## Follow & UnFollow
 @router.post(path="/follow")
-async def Follow(following: str, followed: str):
-    check = await handle_db.GetConfirmConbination(following, followed)
+async def Follow(data: schema.FollowRequest):
+    followed = await handle_db.Followed(data.postid)
+    check = await handle_db.GetConfirmConbination(data.userid, followed)
     if check == "None":
-        result = await handle_db.Follow(following, followed)
+        result = await handle_db.Follow(data.userid, followed)
     elif check == -1:
         return -1
     else:
-        result = await handle_db.ChangeFlag(following, followed)
+        result = await handle_db.ChangeFlag(data.userid, followed)
     return result
 
 ## GetFollow フォローリストをとってくる

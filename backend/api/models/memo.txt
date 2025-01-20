@@ -20,10 +20,10 @@ CREATE TABLE followlist (
 );
 
 CREATE TABLE good (
-    id CHAR(36) PRIMARY KEY,
     user_id CHAR(36),
     post_id CHAR(36),
     flag BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY (user_id, post_id),
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (post_id) REFERENCES post(id)
 );

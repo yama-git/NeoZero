@@ -39,6 +39,16 @@ async def Follow(following, followed):
     session.commit()
     return 0
 
+async def Followed(postid):
+    session = databases.create_new_session()
+    getpost = session.query(models.Post).\
+                    filter(models.Post.id == postid).\
+                    first()
+    if getpost == None:
+        return "None"
+    else:
+        return getpost.user_id
+
 ## ChangeFlag（0:フォロー解除中, 1:フォロー中）
 async def ChangeFlag(following, followed):
     session = databases.create_new_session()
