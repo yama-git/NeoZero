@@ -80,3 +80,14 @@ async def GetFollow(user_id):
                 "comment": followed_user.comment,
             })
     return user_data
+
+## FollowStatus（0:いいね解除中, 1:いいね中）
+async def FollowStatus(following, followed):
+    session = databases.create_new_session()
+    follow = session.query(models.Followlist).\
+                filter(models.Followlist.following == following, 
+                       models.Followlist.followed == followed).\
+                first()
+    if follow == None:
+        return 0
+    return follow.flag

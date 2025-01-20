@@ -41,3 +41,9 @@ async def GetFollow(user_id: str):
     # result = await handle_db.GetIcon(user_id)
     return result
     
+## FollowStatus
+@router.get(path="/post/followstatus")
+async def FollowStatus(data: schema.FollowRequest):
+    followed = await handle_db.Followed(data.postid)
+    result = await handle_db.FollowStatus(data.userid, followed)
+    return result

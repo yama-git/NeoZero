@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './top.module.css';
 import fontstyles from '../font/font.module.css';
@@ -43,6 +43,7 @@ const TopPage = () => {
       return 1;
     }
   }, [userid]);
+
   const handleGood = async (postId) => {
     if (!userid || !postId) return;
 
@@ -84,7 +85,7 @@ const TopPage = () => {
       if (!userid || !postId) return 1;
   
       try {
-        const response = await fetch(`http://localhost:8080/post/goodstatus?userid=${userid}&postid=${postId}`);
+        const response = await fetch(`http://localhost:8080/post/followstatus?userid=${userid}&postid=${postId}`);
   
         if (!response.ok) {
           throw new Error('いいね状態の取得に失敗しました');
@@ -153,6 +154,11 @@ const TopPage = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      if (!userid) {
+        setIsLoading(false);
+        return;
+      }
+
       try {
         setIsLoading(true);
         const response = await fetch('http://localhost:8080/post/new');
@@ -160,7 +166,18 @@ const TopPage = () => {
           throw new Error('投稿の取得に失敗しました');
         }
         const data = await response.json();
-        setPosts(data.posts);
+
+        const postsWithLikeStates = await Promise.all(
+          data.posts.map(async (post) => {
+            const goodStatus = await fetchGoodStatus(post.id);
+            return {
+              ...post,
+              isLiked: goodStatus
+            };
+          })
+        );
+
+        setPosts(postsWithLikeStates);
       } catch (error) {
         console.error('Error fetching posts:', error);
         setError(error.message);
@@ -170,7 +187,7 @@ const TopPage = () => {
     };
 
     fetchPosts();
-  }, []);
+  }, [userid, fetchGoodStatus]); // 依存配列にuseridとfetchGoodStatusを追加
 
   if (isLoading) {
     return <div className={styles.loading}>読み込み中...</div>;
