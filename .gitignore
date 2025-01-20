@@ -1,2 +1,9 @@
 backend/pyproject.toml
 backend/api/__pycache__/
+
+# Pythonのキャッシュファイル
+__pycache__/
+*.pyc
+
+# Node.jsのキャッシュファイル
+node_modules/.cache/
