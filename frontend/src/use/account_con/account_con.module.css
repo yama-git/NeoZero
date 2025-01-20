@@ -1,0 +1,131 @@
+.body {
+    min-height: 100vh; /* 高さ指定 */
+    text-align: center; /* 中央揃え */
+    font-size: medium; /* 文字の大きさ */
+    background: #FFD5EC; /* 背景色 */
+    display: flex;
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.left, .right {
+    flex: 1;
+    display: flex;
+    flex-flow: column; /* 縦並び */
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.topButton {
+    font-size: large;
+    width: 90%; 
+    height: 125px;
+    background: #ffffff;  
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;    
+}
+
+.topButton:hover {
+    background: #c3a8ca; 
+}
+
+.okButton {
+    font-size: large;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;   
+    background: #ff8d78;
+    margin-top: 20px;
+    height: 60px;
+    width: 40%; 
+}
+
+.okButton:hover {
+    background: #ff7d66;
+}
+
+.noButton {
+    font-size: large;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;  
+    margin-bottom: 40px;   
+    background: #789cff;
+    margin-top: 20px;
+    height: 60px;
+    width: 40%; 
+}
+
+.noButton:hover {
+    background: #6b92fc;
+}
+
+.center {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    margin: 40px auto;
+    border-radius: 30px;
+    padding: 10px 0;
+    width: 50%;
+    border: solid 1px;
+    font-size: xx-large;
+    background: #ffffff;
+    color: #FFD5EC;
+}
+
+.white{
+    background: #ffffff; 
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start; 
+}
+
+.con{
+    font-size: x-large;
+}
+
+.red {
+    color: red;
+}
+
+
+.advertisement {
+    width: 90%; 
+    height: 550px;
+    text-align: center;
+    border: 1px solid;
+}
+
+.advertisement2 {
+    width: 90%; 
+    height: 750px;
+    margin-top: 20px;    
+    text-align: center;
+    border: 1px solid;
+}
+
+.advertisement img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.advertisement2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

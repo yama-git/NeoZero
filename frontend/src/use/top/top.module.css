@@ -1,0 +1,187 @@
+.body {
+    min-height: 100vh; /* 高さ指定 */
+    text-align: center; /* 中央揃え */
+    font-size: medium; /* 文字の大きさ */
+    background: #FFD5EC; /* 背景色 */
+    display: flex;
+    flex-flow: column; /* 縦並び */
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.above {
+    display: flex;
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.pawloverslogoImg{
+    width: 20%; 
+    border: 1px solid #000; /* 枠線 */ 
+    border-radius: 30px; /* 丸み */ 
+    margin: 10px 50px; /* 上下左右の余白(外側) */         
+}
+
+.postButton, .mypageButton{
+    height: 150px;
+    width: 30%; 
+    font-size: large; /* 文字の大きさ */ 
+    border: none; /* 枠線 */
+    border-radius: 30px; /* 丸み */
+    background: #b09bd1; /* 背景色 */
+    margin: 10px 50px ; /* 上下左右の余白(外側) */
+    cursor: pointer; /* カーソル変更 */
+}
+
+.postButton:hover, .mypageButton:hover {
+    background: #9a88c7; /* 背景色 */
+}
+
+.bottom{
+    width: 100%;
+    display: flex;
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+.advertisement{
+    height:600px;
+    width: 20%; 
+    /* border: 1px solid #000; /* 枠線 */    
+    margin: 10px 30px; /* 上下左右の余白(外側) */                                
+}
+
+.advertisement img {
+    width: 100%; /* 親要素に合わせる */
+    height: 100%; /* 親要素に合わせる */
+    object-fit: cover; /* トリミングを適用 */
+}
+
+
+
+.media{
+    min-height: 600px; /* 最大高さを設定 */
+    max-height: 600px; /* 最大高さを設定 */
+    width: 50%; 
+    border: 1px solid #000; /* 枠線 */  
+    margin: 10px 30px; /* 上下左右の余白(外側) */ 
+    overflow-y: auto; /* 縦方向にスクロール可能に */   
+    overflow-x: hidden;                     
+}
+
+.white {
+    height: 400px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #000;
+    padding: 10px;
+    box-sizing: border-box; /* paddingを幅に含める */
+    display: flex;
+    justify-content: center; /* 水平方向の中央寄せ */
+    align-items: center;     /* 垂直方向の中央寄せ */
+}
+
+.post {
+    height: 380px;         
+    width: 95%;
+    background: #FFD5EC;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.picture{
+    flex: 3;
+    height: 340px; /* 最大高さを設定 */
+    border: 1px solid #000; /* 枠線 */ 
+    margin: 10px ; /* 上下左右の余白(外側) */
+}
+
+.picture img {
+    width: 100%; /* 画像が横幅100%で拡大縮小される */
+    height: 100%; /* 高さ100%で拡大縮小される */
+    object-fit: cover; /* 枠いっぱいに画像がフィット */
+  }
+  
+.info {
+    flex: 2;
+    height: 340px; 
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.followButton{
+    height: 50px;
+    width: 50%; 
+    font-size: large; /* 文字の大きさ */ 
+    border: none; /* 枠線 */
+    border-radius: 30px; /* 丸み */
+    background: #b09bd1; /* 背景色 */
+    padding: 10px; 
+    margin-top: 5px; /* 上下左右の余白(外側) */
+    cursor: pointer; /* カーソル変更 */
+}
+.followButton:hover {
+    background: #9a88c7; /* 背景色 */
+}
+
+/*いいねボタン*/
+.good{
+    height: 50px;
+    width: 50%; 
+    font-size: large; /* 文字の大きさ */ 
+    border: none; /* 枠線 */
+    border-radius: 30px; /* 丸み */
+    background: #b09bd1; /* 背景色 */
+    padding: 10px; 
+    margin-top: 5px; /* 上下左右の余白(外側) */
+    cursor: pointer; /* カーソル変更 */
+}
+.good:hover {
+    background: #9a88c7; /* 背景色 */
+}
+
+
+
+.push{
+    width: 100%; 
+    display: flex;
+    align-items: center; /* 上下中央寄せ */
+    justify-content: center; /* 左右中央寄せ */
+}
+
+
+.money{
+    height: 70px;
+    width: 100%; 
+    border: 1px solid #000; /* 枠線 */ 
+    margin: 10px; /* 上下左右の余白(外側) */
+}
+
+.comment {
+    height: 300px; /* 高さを調整 */
+    width: 90%;
+    border: 1px solid #000;
+    margin: 10px;
+}
+
+.reportButton {
+    height: 30px;
+    width: 30%; 
+    font-size: small; /* 文字の大きさ */ 
+    border: none; /* 枠線 */
+    border-radius: 30px; /* 丸み */
+    background: #ff8d78;
+    padding: 10px; 
+    margin: 0 0 10px auto;
+    cursor: pointer; /* カーソル変更 */
+}
+    
+.reportButton:hover {
+    background: #ff7d66;
+}
