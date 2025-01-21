@@ -34,6 +34,17 @@ async def GetOnesPost(user_id):
         posts = -1
     return posts
 
+## GetOnesName
+async def GetOnesName(user_id):
+    session = databases.create_new_session()
+    user = session.query(models.User).\
+                filter(models.User.id == user_id).\
+                first()       
+    if user == None:
+        return -1
+    return user.name
+
+
 ## GetNewPost
 async def GetNewPost():
     session = databases.create_new_session()

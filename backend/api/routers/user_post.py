@@ -37,10 +37,11 @@ async def GetOnesPost(user_id: str):
         return -1
     posts = [
         {
+            "id": post.id,
+            "name": await handle_db.GetOnesName(user_id),
             "title": post.title,
-            "caption": post.caption,
-            "goodcount": post.goodcount,
-            "postimage": post.image
+            "comment": post.caption,
+            "image": post.image
         }
         for post in result
     ]
