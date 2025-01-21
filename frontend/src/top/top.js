@@ -59,6 +59,7 @@ const TopPage = () => {
         throw new Error('いいねの更新に失敗しました');
       }
 
+      window.location.reload();
       // 現在の投稿のいいね状態を反転させる（0 → 1 または 1 → 0）
       setPosts(prevPosts => {
         return prevPosts.map(post => {
@@ -111,8 +112,7 @@ const TopPage = () => {
         throw new Error('フォローの更新に失敗しました');
       }
   
-      // let followedUserId = null;
-  
+      window.location.reload();
       // フォロー状態の反転処理
       setPosts((prevPosts) => {
         return prevPosts.map((post) => {
