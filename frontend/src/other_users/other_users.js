@@ -26,30 +26,7 @@ const OtherUsers = () => {
     navigate('/top'); // トップページに移動
   };
 
-  // const handleFollow = useCallback(async (followedid) => {
-  //       if (!userid || !followedid) return;
-  //       console.log(userid, followedid);
-  //       try {
-  //         const response = await fetch('http://localhost:8080/follow', {
-  //           method: 'POST',
-  //           headers: { 'Content-Type': 'application/json' },
-  //           body: JSON.stringify({ userid, followedid }),
-  //         });
-      
-  //         if (!response.ok) {
-  //           throw new Error('フォローの更新に失敗しました');
-  //         }
-  //         const status = await response.json();
-  //         console.log(status);
-  //         window.location.reload();
-  //       } catch (error) {
-  //         console.error('フォロー処理エラー:', error);
-  //       }
-  //     }, [userid]);
-
-  const handleReport = () => { // 「通報」ボタン押下
-    navigate('/report_con'); 
-  };
+ 
 
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
@@ -116,26 +93,8 @@ const OtherUsers = () => {
                   <div className={styles.picture}>{post.image}</div>
                   
                   <div className={styles.info}>
-                    <button
-                      className={styles.followButton}
-                      // onClick={() => handleFollow(id)}
-                      style={inputStyle}
-                    >
-                      フォロー中
-                    </button>
                     
-                    <div className={styles.push}>
-                      <div className={styles.good}>いいね</div>
-                      <div className={styles.money}>スパチャ</div>
-                    </div>
-                    <div className={styles.comment}>{post.comment}</div>
-                    <button
-                      className={styles.reportButton}
-                      onClick={handleReport}
-                      style={inputStyle}
-                    >
-                      通報
-                    </button>
+                    <div className={styles.comment}>{post.comment}ワン</div>
                   </div>
                 </div>
               </div> 
