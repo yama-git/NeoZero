@@ -18,22 +18,22 @@ const AccountReg = () => {
     const passwordRegex = /^[a-zA-Z0-9]{8,16}$/; // パスワードの形式チェック
 
     if (!email || !name || !password || !passwordConfirm) {
-      setErrorMessage("※必須項目が入力されていません。");
+      setErrorMessage("※必須項目が入力されてないニャン。");
       return;
     }
 
     if (!passwordRegex.test(password)) {
-      setErrorMessage("※パスワードは半角英数字8~16文字で入力してください。");
+      setErrorMessage("※パスワードは半角英数字8~16文字で入力してワン。");
       return;
     }
 
     if (password !== passwordConfirm) {
-      setErrorMessage("※パスワードが一致しません。");
+      setErrorMessage("※パスワードが一致しないニャン。");
       return;
     }
 
     if (comment.length > 100) {
-      setErrorMessage("※フリーコメントは100文字以内で入力してください。");
+      setErrorMessage("※フリーコメントは100文字以内で入力してニャン。");
       return;
     }
 
@@ -54,13 +54,13 @@ const AccountReg = () => {
           setErrorMessage('');
           navigate('/');
         } else {  // 認証失敗
-          setErrorMessage('※入力情報が間違っていますニャン。');
+          setErrorMessage('※入力情報が間違っているニャン。');
         }
       } else {
-        setErrorMessage(data.error || '※ログインに失敗しましたワン。');
+        setErrorMessage(data.error || '※ログインに失敗したワン。');
       }
     } catch (error) {
-      setErrorMessage('※サーバーとの通信に失敗しましたニャン。');
+      setErrorMessage('※サーバーとの通信に失敗したニャン。');
     }
   };
 

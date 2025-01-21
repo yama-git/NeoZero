@@ -19,25 +19,20 @@ const RmAccount = () => {
 
   const handleOkClick = () => {
     if (!email) {
-      setErrorMessage('※メールアドレスを入力してくださいワン。');
+      setErrorMessage('※メールアドレスを入力してワン。');
       return;
     }
 
     if (!password) {
-      setErrorMessage('※パスワードを入力してくださいニャン。');
+      setErrorMessage('※パスワードを入力してニャン。');
       return;
     }
 
     if (!validatePassword(password)) {
-      setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいワン。');
+      setErrorMessage('※パスワードは半角英数字8～16文字で入力してワン。');
       return;
     }
-
-    //if (email === 'admin@example.com' && password === 'password123') {
     navigate('/account_con');
-    //} else {
-    //setErrorMessage('※間違っています。もう一度入力してください。');
-    //}
   };
 
 

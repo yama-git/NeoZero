@@ -32,13 +32,13 @@ const TopPage = () => {
     try {
       const response = await fetch(`http://localhost:8080/post/goodstatus/${userid}/${postId}`);
       if (!response.ok) {
-        throw new Error('いいね状態の取得に失敗しました');
+        throw new Error('※いいね状態の取得に失敗したニャン。');
       }
 
       const status = await response.json();
       return status;
     } catch (error) {
-      console.error('いいね状態取得エラー:', error);
+      console.error('※いいね状態取得エラー:', error);
       return 1;
     }
   }, [userid]);
@@ -56,7 +56,7 @@ const TopPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error('いいねの更新に失敗しました');
+        throw new Error('※いいねの更新に失敗したニャン。');
       }
 
       window.location.reload();
@@ -75,7 +75,7 @@ const TopPage = () => {
       });
 
     } catch (error) {
-      console.error('いいね処理エラー:', error);
+      console.error('※いいね処理エラー:', error);
     }
   }, [userid]);
 
@@ -87,13 +87,13 @@ const TopPage = () => {
       const response = await fetch(`http://localhost:8080/post/followstatus/${userid}/${postId}`);
 
       if (!response.ok) {
-        throw new Error('フォロー状態の取得に失敗しました');
+        throw new Error('※フォロー状態の取得に失敗したニャン。');
       }
 
       const status = await response.json();
       return status;
     } catch (error) {
-      console.error('フォロー状態取得エラー:', error);
+      console.error('※フォロー状態取得エラー:', error);
       return 1;
     }
   }, [userid]);
@@ -109,7 +109,7 @@ const TopPage = () => {
       });
   
       if (!response.ok) {
-        throw new Error('フォローの更新に失敗しました');
+        throw new Error('※フォローの更新に失敗したニャン。');
       }
   
       window.location.reload();
@@ -164,7 +164,7 @@ const TopPage = () => {
         setIsLoading(true);
         const response = await fetch('http://localhost:8080/post/new');
         if (!response.ok) {
-          throw new Error('投稿の取得に失敗しました');
+          throw new Error('※投稿の取得に失敗したニャン。');
         }
         const data = await response.json();
         const postsWithStatuses = await Promise.all(
@@ -245,7 +245,7 @@ const TopPage = () => {
                       className={styles.postImage}
                       onError={(e) => {
                         e.target.src = '/placeholder.png';
-                        console.error('画像の読み込みに失敗しました');
+                        console.error('※画像の読み込みに失敗したニャン。');
                       }}
                     />
                   </div>
