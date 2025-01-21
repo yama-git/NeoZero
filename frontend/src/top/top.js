@@ -140,9 +140,9 @@ const TopPage = () => {
     navigate('/mypage');
   };
 
-  const handleReport = () => {
-    navigate('/report_con');
-  };
+  const handleReport = (postId) => {
+    navigate(`/report_con`, { state: { postId } });
+  }
 
   const handlesuperchat = () => {
     //外部サイトへ飛ぶ(新しいタブで)
@@ -279,12 +279,12 @@ const TopPage = () => {
 
                     <div className={styles.comment}>{post.comment}</div>
                     <button
-                      className={styles.reportButton}
-                      onClick={handleReport}
-                      style={inputStyle}
-                    >
-                      通報
-                    </button>
+                    className={styles.reportButton}
+                    onClick={() => handleReport(post.id)}
+                    style={inputStyle}
+                  >
+                    通報
+                  </button>
                   </div>
                 </div>
               </div>

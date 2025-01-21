@@ -74,7 +74,11 @@ async def ReportPost(postid):
         return -1
     else:
         return {
+           "posts":[
+            {
             "name": user.name,
             "comment": post.caption,
             "image": post.image
+            }
+            ]
     }
