@@ -133,3 +133,10 @@
 ::placeholder {
     text-align: center;
 }
+
+.center label{
+    width: 70%; 
+    text-align: left;
+    margin: 0;
+    padding-left: 10px; 
+}

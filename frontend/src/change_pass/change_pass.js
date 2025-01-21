@@ -146,33 +146,33 @@ const ChangePass = () => {
             <p className={styles.errorMessage}>{errorMessage}</p>
           )}
 
+          <label>今のメールアドレス</label>
           <div className={styles.inputContainer}>
             <input
               type="email"
               className={styles.input}
-              placeholder="今のメールアドレス"
               value={nowEmail}
               style={inputStyle}
               onChange={(e) => setNowEmail(e.target.value)}
             />
           </div>
 
+          <label>今のパスワード</label>
           <div className={styles.inputContainer}>
             <input
               type="password"
               className={styles.input}
-              placeholder="今のパスワード"
               value={nowPassword}
               onChange={(e) => setNowPassword(e.target.value)}
             />
             <p className={styles.note}>※半角英数字8~16文字</p>
           </div>
 
+          <label>新しいパスワード</label>
           <div className={styles.inputContainer}>
             <input
               type="email"
               className={styles.input}
-              placeholder="新しいパスワード"
               value={newPassword}
               style={inputStyle}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -181,11 +181,11 @@ const ChangePass = () => {
             <p className={styles.note}>※半角英数字8~16文字</p>
           </div>
 
+          <label>新しいパスワード（再確認）</label>
           <div className={styles.inputContainer}>
             <input
               type="password"
               className={styles.input}
-              placeholder="新しいパスワード(再確認)"
               value={newPasswordCon}
               onChange={(e) => setNewPasswordCon(e.target.value)}
             />

@@ -29,22 +29,22 @@ const MailChange = () => {
     const { currentEmail, newEmail, currentPassword } = formData;
 
     if (!currentEmail) {
-      setErrorMessage('※現在のメールアドレスを入力してくださいニャン。');
+      setErrorMessage('※現在のメールアドレスを入力してニャン。');
       return;
     }
 
     if (!newEmail) {
-      setErrorMessage('※新しいメールアドレスを入力してくださいワン。');
+      setErrorMessage('※新しいメールアドレスを入力してワン。');
       return;
     }
 
     if (!currentPassword) {
-      setErrorMessage('※パスワードを入力してくださいニャン。');
+      setErrorMessage('※パスワードを入力してニャン。');
       return;
     }
 
     if (!validatePassword(currentPassword)) {
-      setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいワン。');
+      setErrorMessage('※パスワードは半角英数字8～16文字で入力してワン。');
       return;
     }
 
@@ -78,13 +78,13 @@ const MailChange = () => {
           setErrorMessage('');
           navigate('/change_info');
         } else {  // 認証失敗
-          setErrorMessage('※入力情報が間違っていますニャン。');
+          setErrorMessage('※入力情報が間違ってるニャン。');
         }
       } else {
-        setErrorMessage(data.error || '※メール変更に失敗しましたワン。');
+        setErrorMessage(data.error || '※メール変更に失敗したワン。');
       }
     } catch (error) {
-      setErrorMessage('※サーバーとの通信に失敗しましたニャン。');
+      setErrorMessage('※サーバーとの通信に失敗したニャン。');
     };
   };
 
@@ -122,29 +122,29 @@ const MailChange = () => {
       <div className={styles.center}>
         <div className={styles.mail}>メールアドレス変更</div>
         <p className={styles.p}>{errorMessage}</p>
+        <label>今のメールアドレス</label>
         <input
           type="email"
           name="currentEmail"
           className={styles.input}
-          placeholder="今のメールアドレス"
           value={formData.currentEmail}
           onChange={handleInputChange}
           style={inputStyle}
         />
+        <label>新しいメールアドレス</label>
         <input
           type="email"
           name="newEmail"
           className={styles.input}
-          placeholder="新しいメールアドレス"
           value={formData.newEmail}
           style={inputStyle}
           onChange={handleInputChange}
         />
+        <label>今のパスワード</label>
         <input
           type="password"
           name="currentPassword"
           className={styles.input}
-          placeholder="今のパスワード"
           value={formData.currentPassword}
           onChange={handleInputChange}
         />

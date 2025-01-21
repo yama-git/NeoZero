@@ -117,3 +117,10 @@
     height: 100%;
     object-fit: cover;
 }
+
+.center label{
+    width: 70%; 
+    text-align: left;
+    margin: 0;
+    padding-left: 10px; 
+}

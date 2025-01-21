@@ -67,19 +67,19 @@ const RmAccount = () => {
         <div className={styles.center}>
           <div className={styles.account}>アカウント消去</div>
           <p className={styles.errorMessage}>{errorMessage}</p>
+          <label>メールアドレス</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={styles.input}
-            placeholder="メールアドレス"
           />
+          <label>パスワード</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={styles.input}
-            placeholder="パスワード"
           />
 
           <p className={styles.passwordHint}>
