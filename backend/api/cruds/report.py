@@ -78,7 +78,8 @@ async def ReportPost(postid):
             {
             "name": user.name,
             "comment": post.caption,
-            "image": post.image
+            "image": post.image,
+            "reportuserid":user.id
             }
             ]
     }

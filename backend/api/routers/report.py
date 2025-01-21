@@ -3,6 +3,7 @@ import api.models.models as models
 from fastapi.middleware.cors import CORSMiddleware
 import api.cruds.report as handle_db
 import api.cruds.images as image_db
+import api.schemas.report as schema
 import datetime
 
 app = FastAPI()
@@ -18,22 +19,22 @@ app.add_middleware(
 )
 
 ## GetReport
-@router.get(path="/report/count/{user_id}")
+@router.get(path="/report/get")
 async def GetReport(user_id: str):
     result = await handle_db.GetReport(user_id)
     return result
     
 
 ## Insert&UpdateReport
-@router.put(path="/report/countup/{user_id}")
-async def InsertUpdateReport(user_id: str):
-    result = await GetReport(user_id)
+@router.post(path="/report/count")
+async def InsertUpdateReport(data: schema.ReportRequest):
+    result = await GetReport(data.userid)
     if result == -1:
         return -1
     elif result == 0:
-        result = await handle_db.InsertReport(user_id)
+        result = await handle_db.InsertReport(data.userid)
     else:
-        result = await handle_db.UpdateReport(user_id)
+        result = await handle_db.UpdateReport(data.userid)
     return result
 
 ## ExclusionViolationUser

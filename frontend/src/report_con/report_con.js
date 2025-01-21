@@ -28,15 +28,15 @@ const ReportCon = () => {
     navigate('/top');
   };
 
-  const handleok = async () => {
+  const handleok = async (reportuserid) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:8080/report', {
+      const response = await fetch('http://localhost:8080/report/count', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userid, postid: postId }),
+        body: JSON.stringify({ userid: reportuserid }),
       });
 
       if (!response.ok) {
@@ -155,7 +155,7 @@ const ReportCon = () => {
           <div className={styles.buttons}>
             <button
               className={styles.okButton}
-              onClick={handleok}
+              onClick={() => handleok(post.reportuserid)}
               disabled={isSubmitting || isLoading || !post}
               style={inputStyle}
             >
