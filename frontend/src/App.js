@@ -46,7 +46,7 @@ function App() {
           <Route path="/pet_con" element={<PetCon/>} /> {/*ペット変更確認画面*/}
           <Route path="/pet_change" element={<PetChange/>} /> {/*ペット変更画面*/}
           <Route path="/post" element={<Post/>} /> {/*投稿画面*/}
-          <Route path="/other_users" element={<OtherUsers/>} /> {/*他ユーザ投稿閲覧画面*/}
+          <Route path="/other_users/:id" element={<OtherUsers/>} /> {/*他ユーザ投稿閲覧画面*/}
           <Route path="/report_con" element={<ReportCon/>} /> {/*アカウント通報確認画面*/}
         </Routes>
       </div>

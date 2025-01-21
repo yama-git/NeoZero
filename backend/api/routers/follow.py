@@ -30,19 +30,6 @@ async def Follow(data: schema.FollowStatusRequest):
         result = await handle_db.ChangeFlag(data.userid, data.followedid)
     return result
 
-## Nyakama内でUnFollow
-@router.put(path="/unfollow")
-async def Follow(data: schema.FollowRequest):
-    followed = await handle_db.Followed(data.followid)
-    check = await handle_db.GetConfirmConbination(data.userid, followed)
-    if check == "None":
-        result = await handle_db.Follow(data.userid, followed)
-    elif check == -1:
-        return -1
-    else:
-        result = await handle_db.ChangeFlag(data.userid, followed)
-    return result
-
 ## GetFollow フォローリストをとってくる
 @router.get(path="/followlist/{userid}")
 async def GetFollow(userid: str):

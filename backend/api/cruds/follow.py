@@ -78,6 +78,7 @@ async def GetFollow(user_id):
                 first()
         if followed_user:
             user_data.append({
+                "id": followed_user.id,
                 "name": followed_user.name,
                 "comment": followed_user.comment,
             })
