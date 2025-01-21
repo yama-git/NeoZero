@@ -277,7 +277,7 @@ const TopPage = () => {
                       </button>
                     </div>
 
-                    <div className={styles.comment}>{post.comment}</div>
+                    <div className={styles.comment}>{post.comment}ニャン</div>
                     <button
                     className={styles.reportButton}
                     onClick={() => handleReport(post.id)}
