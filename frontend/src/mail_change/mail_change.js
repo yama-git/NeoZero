@@ -96,6 +96,16 @@ const MailChange = () => {
     }));
   };
 
+  const handlead1 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_shinomori.shtml', '_blank', 'noopener noreferrer')
+  };
+
+  const handlead2 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_iwata.shtml', '_blank', 'noopener noreferrer')
+  };
+
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
   };
@@ -112,10 +122,15 @@ const MailChange = () => {
           トップページへ戻る
         </button>
         <div className={styles.advertisement}>
+        <button
+            className={styles.adbutton}
+              onClick={handlead1}
+            >
           <img
             src={Left1Img} // 広告サンプル
             alt="Left1Img" // 代替テキスト
           />
+          </button>
         </div>
       </div>
 
@@ -160,10 +175,15 @@ const MailChange = () => {
 
       <div className={styles.right}>
         <div className={styles.advertisement2}>
+        <button
+            className={styles.adbutton}
+              onClick={handlead2}
+            >
           <img
             src={Right1Img} // 広告サンプル
             alt="Right1Img" // 代替テキスト
           />
+          </button>
         </div>
       </div>
       </div>

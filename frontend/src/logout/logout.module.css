@@ -109,7 +109,7 @@
     width: 90%; 
     height: 550px;
     text-align: center;
-    border: 1px solid;
+    border: none;
 }
 
 
@@ -118,7 +118,7 @@
     height: 750px;
     margin-top: 20px;    
     text-align: center;
-    border: 1px solid;
+    border: none;
 }
 
 .advertisement img {
@@ -135,4 +135,11 @@
 
 input::placeholder {
     text-align: center;
+}
+
+.adbutton{
+    height:600px;
+    width: 280px; 
+    background: #FFD5EC; /* 背景色 */ 
+    border: none; /* 枠線 */
 }

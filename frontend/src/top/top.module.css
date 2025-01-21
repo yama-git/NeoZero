@@ -48,7 +48,15 @@
     height:600px;
     width: 20%; 
     /* border: 1px solid #000; /* 枠線 */    
+   
     margin: 10px 30px; /* 上下左右の余白(外側) */                                
+}
+
+.adbutton{
+    height:600px;
+    width: 280px; 
+    background: #FFD5EC; /* 背景色 */ 
+    border: none; /* 枠線 */
 }
 
 .advertisement img {

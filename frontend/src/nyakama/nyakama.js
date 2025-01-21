@@ -81,10 +81,21 @@ const Nyakama = () => {
   if (isLoading) {
     return <div className={styles.loading}>読み込み中...</div>;
   }
+  
 
   if (error) {
     return <div className={styles.error}>エラー: {error}</div>;
   }
+
+  const handlead1 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_matsuzaki.shtml', '_blank', 'noopener noreferrer')
+  };
+
+  const handlead2 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_takata.shtml', '_blank', 'noopener noreferrer')
+  };
 
   return (
     <div className={fontstyles.fontFamily}>
@@ -98,10 +109,15 @@ const Nyakama = () => {
             トップページへ戻る
           </button>
           <div className={styles.advertisement}>
+          <button
+            className={styles.adbutton}
+              onClick={handlead1}
+            >
             <img
               src={Left1Img}
               alt="Left1Img"
             />
+            </button>
           </div>
         </div>
         <div className={styles.center}>
@@ -135,10 +151,15 @@ const Nyakama = () => {
         </div>
         <div className={styles.right}>
           <div className={styles.advertisement2}>
+          <button
+            className={styles.adbutton}
+              onClick={handlead2}
+            >
             <img
               src={Right1Img}
               alt="Right1Img"
             />
+            </button>
           </div>
         </div>
       </div>

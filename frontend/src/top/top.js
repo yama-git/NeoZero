@@ -22,7 +22,7 @@ const TopPage = () => {
     if (parts.length === 2) return parts.pop().split(';').shift();
     return '';
   };
-  
+
   const userid = getCookie('userid');
 
   // 以下いいね用の関数
@@ -100,23 +100,23 @@ const TopPage = () => {
 
   const handleFollow = useCallback(async (followedid) => {
     if (!userid || !followedid) return;
-  
+
     try {
       const response = await fetch('http://localhost:8080/follow', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid, followedid }),
       });
-  
+
       if (!response.ok) {
         throw new Error('※フォローの更新に失敗したニャン。');
       }
-  
+
       window.location.reload();
       // フォロー状態の反転処理
       setPosts((prevPosts) => {
         return prevPosts.map((post) => {
-  
+
           // 同じユーザーが投稿した他の投稿にも反映
           if (post.userid === followedid) {
             return {
@@ -124,16 +124,16 @@ const TopPage = () => {
               isFollowed: post.isFollowed === 0 ? 1 : 0, // フォロー状態を反転
             };
           }
-  
+
           return post;
         });
       });
-  
+
     } catch (error) {
       console.error('フォロー処理エラー:', error);
     }
   }, [userid]);
-  
+
 
 
   const handleMypage = () => {
@@ -152,7 +152,16 @@ const TopPage = () => {
   const inputStyle = {
     fontFamily: 'CraftMincho, serif',
   };
+//広告ボタン
+  const handlead1 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_shinomori.shtml', '_blank', 'noopener noreferrer')
+  };
 
+  const handlead2 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_iwata.shtml', '_blank', 'noopener noreferrer')
+  };
   useEffect(() => {
     const fetchPosts = async () => {
       if (!userid) {
@@ -228,10 +237,15 @@ const TopPage = () => {
 
         <div className={styles.bottom}>
           <div className={styles.advertisement}>
+          <button
+            className={styles.adbutton}
+              onClick={handlead1}
+            >
             <img
               src={TopleftImg}
               alt="広告"
             />
+            </button>
           </div>
 
           <div className={styles.media}>
@@ -254,7 +268,7 @@ const TopPage = () => {
                     <button
                       className={styles.followButton}
                       onClick={() => handleFollow(post.userid)}
-                      style={inputStyle} 
+                      style={inputStyle}
                     >
                       {post.isFollowed ? 'フォロー中' : 'フォロー'}
                     </button>
@@ -279,12 +293,12 @@ const TopPage = () => {
 
                     <div className={styles.comment}>{post.comment}ニャン</div>
                     <button
-                    className={styles.reportButton}
-                    onClick={() => handleReport(post.id)}
-                    style={inputStyle}
-                  >
-                    通報
-                  </button>
+                      className={styles.reportButton}
+                      onClick={() => handleReport(post.id)}
+                      style={inputStyle}
+                    >
+                      通報
+                    </button>
                   </div>
                 </div>
               </div>
@@ -292,10 +306,15 @@ const TopPage = () => {
           </div>
 
           <div className={styles.advertisement}>
-            <img
-              src={ToprightImg}
-              alt="広告"
-            />
+            <button
+            className={styles.adbutton}
+              onClick={handlead2}
+            >
+              <img
+                src={ToprightImg}
+                alt="広告"
+              />
+            </button>
           </div>
         </div>
       </div>
