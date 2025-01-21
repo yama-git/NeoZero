@@ -34,7 +34,7 @@ async def GetOnesPost(user_id):
         posts = -1
     return posts
 
-## GetOnesName
+## 追加GetOnesName
 async def GetOnesName(user_id):
     session = databases.create_new_session()
     user = session.query(models.User).\

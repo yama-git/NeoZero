@@ -115,14 +115,14 @@ const OtherUsers = () => {
                 <div className={styles.post}>
                   <div className={styles.picture}>{post.image}</div>
                   
-                  {/* <div className={styles.info}>
+                  <div className={styles.info}>
                     <button
                       className={styles.followButton}
-                      onClick={() => handleFollow(id)}
+                      // onClick={() => handleFollow(id)}
                       style={inputStyle}
                     >
                       フォロー中
-                    </button> */}
+                    </button>
                     
                     <div className={styles.push}>
                       <div className={styles.good}>いいね</div>

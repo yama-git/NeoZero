@@ -102,11 +102,7 @@ async def DeletePost(user_id: str, post_id: str):
     result = await handle_db.DeletePost(user_id, post_id)
     return result
 
-# GoodCount
-# @router.get(path="/post/goodcount/{post_id}")
-# async def GoodCount(post_id: str):
-#     result = await handle_db.GoodCount(post_id)
-#     return result
+
 
 ## Good
 # @router.put(path="/post/good/{post_id}")
