@@ -19,10 +19,10 @@ const PetChange = () => {
 
   const handlepetcon = () => {
     // バリデーションチェック
-    if (!imagePreview) {
-      setErrorMessage('※画像は必須項目ニャン。');
-      return;
-    }
+    // if (!imagePreview) {
+    //   setErrorMessage('※画像は必須項目ニャン。');
+    //   return;
+    // }
 
     if (name.length > 8) {
       setErrorMessage('※名前は8文字以内で入力してワン。');
