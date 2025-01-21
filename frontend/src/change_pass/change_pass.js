@@ -29,35 +29,35 @@ const ChangePass = () => {
     navigate('/top'); // トップページに移動
   };
 
-  const handleok =async () => { // 「OK」ボタン押下
+  const handleok = async () => { // 「OK」ボタン押下
 
     if (!nowEmail) {
-      setErrorMessage('※現在のメールアドレスを入力してくださいワン。');
+      setErrorMessage('※現在のメールアドレスを入力してワン。');
       return;
     }
 
     // 現在のパスワードのチェック
     if (!nowPassword) {
-      setErrorMessage('※現在のパスワードを入力してくださいニャン。');
+      setErrorMessage('※現在のパスワードを入力してニャン。');
       return;
     }
 
     // パスワードの形式チェック（現在のパスワード）
     if (!validatePassword(nowPassword)) {
-      setErrorMessage('※現在のパスワードは半角英数字8～16文字で入力してくださいワン。');
+      setErrorMessage('※現在のパスワードは半角英数字8～16文字で入力してワン。');
       return;
     }
 
 
     // 新しいパスワードのチェック
     if (!newPassword) {
-      setErrorMessage('※新しいパスワードを入力してくださいニャン。');
+      setErrorMessage('※新しいパスワードを入力してニャン。');
       return;
     }
 
     // パスワードの形式チェック（新しいパスワード）
     if (!validatePassword(newPassword)) {
-      setErrorMessage('※新しいパスワードは半角英数字8～16文字で入力してくださいワン。');
+      setErrorMessage('※新しいパスワードは半角英数字8～16文字で入力してワン。');
       return;
     }
 
@@ -69,7 +69,7 @@ const ChangePass = () => {
 
     // 同一パスワードチェック
     if (newPassword === nowPassword) {
-      setErrorMessage('※新しいパスワードは現在のパスワードと異なるものを設定してくださいワン。');
+      setErrorMessage('※新しいパスワードは現在のパスワードと異なるものを設定してワン。');
       return;
     }
 
@@ -80,7 +80,7 @@ const ChangePass = () => {
       if (parts.length === 2) return parts.pop().split(';').shift();
       return '';
     };
-    
+
     const userid = getCookie('userid');
     try {
       const response = await fetch('http://localhost:8080/userinfo/pass/change', {
@@ -90,11 +90,11 @@ const ChangePass = () => {
         },
         //送信情報
         body: JSON.stringify({
-          userid: userid, 
-          email: nowEmail, 
-          password: nowPassword, 
+          userid: userid,
+          email: nowEmail,
+          password: nowPassword,
           new_pass: newPassword
-        }), 
+        }),
       });
 
       const data = await response.json();
@@ -104,19 +104,14 @@ const ChangePass = () => {
           setErrorMessage('');
           navigate('/change_info');
         } else {  // 認証失敗
-          setErrorMessage('※入力情報が間違っていますニャン。');
+          setErrorMessage('※入力情報が間違っているニャン。');
         }
       } else {
-        setErrorMessage(data.error || '※ログインに失敗しましたワン。');
+        setErrorMessage(data.error || '※ログインに失敗したワン。');
       }
     } catch (error) {
-      setErrorMessage('※サーバーとの通信に失敗しましたニャン。');
+      setErrorMessage('※サーバーとの通信に失敗したニャン。');
     }
-    //if (nowEmail === 'admin@example.com' && nowPassword === 'password123') {
-    //navigate('/change_info');
-    //} else {
-    //setErrorMessage('※間違っています。もう一度入力してください。');
-    //}
   };
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'

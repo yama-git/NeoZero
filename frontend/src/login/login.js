@@ -65,11 +65,11 @@ const Login = () => {
         document.cookie = "userid=" + data + "; max-age=3600;"; // 有効期限を追加
         navigate('/top');
       } else {  // 認証成功
-        setErrorMessage('入力情報が間違っています');
+        setErrorMessage('※入力情報が間違ってるニャン。');
         return;
       }
     } catch (error) {
-      setErrorMessage('サーバーとの通信に失敗しました。');
+      setErrorMessage('※サーバーとの通信に失敗したワン。');
     }
   };
 
@@ -98,7 +98,6 @@ const Login = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="メールアドレスを入力してください"
               required
               style={inputStyle}
             />
@@ -111,7 +110,6 @@ const Login = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="パスワードを入力してください"
               required
             />
             <p className={styles.passwordHint}>
@@ -135,7 +133,7 @@ const Login = () => {
           </button>
 
           <p className={styles.new}>
-            ・・・・・・・・・・・・初めての方はこちら・・・・・・・・・・・・
+            ・・・・・・・・・・・・初めての方はこっちワン・・・・・・・・・・・・
           </p>
 
           <button
