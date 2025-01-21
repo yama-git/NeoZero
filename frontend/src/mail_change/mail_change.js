@@ -122,29 +122,29 @@ const MailChange = () => {
       <div className={styles.center}>
         <div className={styles.mail}>メールアドレス変更</div>
         <p className={styles.p}>{errorMessage}</p>
+        <label>今のメールアドレス</label>
         <input
           type="email"
           name="currentEmail"
           className={styles.input}
-          placeholder="今のメールアドレス"
           value={formData.currentEmail}
           onChange={handleInputChange}
           style={inputStyle}
         />
+        <label>新しいメールアドレス</label>
         <input
           type="email"
           name="newEmail"
           className={styles.input}
-          placeholder="新しいメールアドレス"
           value={formData.newEmail}
           style={inputStyle}
           onChange={handleInputChange}
         />
+        <label>今のパスワード</label>
         <input
           type="password"
           name="currentPassword"
           className={styles.input}
-          placeholder="今のパスワード"
           value={formData.currentPassword}
           onChange={handleInputChange}
         />
