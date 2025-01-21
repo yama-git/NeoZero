@@ -38,7 +38,7 @@ const Nyakama = () => {
         });
     
         if (!response.ok) {
-          throw new Error('フォローの更新に失敗しました');
+          throw new Error('※フォローの更新に失敗したワン。');
         }
         const status = await response.json();
         console.log(status);
@@ -63,7 +63,7 @@ const Nyakama = () => {
         setIsLoading(true);
         const response = await fetch(`http://localhost:8080/followlist/${userid}`);
         if (!response.ok) {
-          throw new Error('フォローリストの取得に失敗しました');
+          throw new Error('※フォローリストの取得に失敗したワン');
         }
         const followListData = await response.json();
         // console.log(followListData);
