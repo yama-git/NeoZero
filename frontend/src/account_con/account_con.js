@@ -24,7 +24,7 @@ const AccountCon = () => {
 
   const handleOk =  async() => { // 「同意してアカウント消去」ボタン押下
     try {
-      const response = await fetch(`http://localhost:8080/post/followstatus/${userid}`);
+      const response = await fetch(`http://localhost:8080/userinfo/account/delete/${userid}`);
 
       if (!response.ok) {
         throw new Error('※アカウント消去に失敗したニャン。');
