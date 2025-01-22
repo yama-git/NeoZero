@@ -28,12 +28,12 @@ const Logout = () => {
 
   const handlead1 = () => {
     //外部サイトへ飛ぶ(新しいタブで)
-    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_shinomori.shtml', '_blank', 'noopener noreferrer')
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_shikida.shtml', '_blank', 'noopener noreferrer')
   };
 
   const handlead2 = () => {
     //外部サイトへ飛ぶ(新しいタブで)
-    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_iwata.shtml', '_blank', 'noopener noreferrer')
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_shigemasu.shtml', '_blank', 'noopener noreferrer')
   };
 
 

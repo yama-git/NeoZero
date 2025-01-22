@@ -35,7 +35,7 @@ const ChangeInfo = () => {
 
   const handlead2 = () => {
     //外部サイトへ飛ぶ(新しいタブで)
-    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_iwata.shtml', '_blank', 'noopener noreferrer')
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_harada.shtml', '_blank', 'noopener noreferrer')
   };
 
   return (
@@ -86,7 +86,7 @@ const ChangeInfo = () => {
         <div className={styles.advertisement2}>
         <button
             className={styles.adbutton}
-              onClick={handlead1}
+              onClick={handlead2}
             >
           <img
             src={Right2Img} // 広告サンプル
