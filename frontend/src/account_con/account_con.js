@@ -9,12 +9,33 @@ import Right2Img from '../image/Right2.png'; //259:750
 const AccountCon = () => {
   const navigate = useNavigate(); // ページ遷移用
 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return '';
+  };
+
+  const userid = getCookie('userid');
+
   const handleTop = () => { // 「トップページへ戻る」ボタン押下
     navigate('/top'); // トップページに移動
   };
 
-  const handleOk = () => { // 「同意してアカウント消去」ボタン押下
-    navigate('/login'); // ログインページに移動
+  const handleOk =  async() => { // 「同意してアカウント消去」ボタン押下
+    try {
+      const response = await fetch(`http://localhost:8080/post/followstatus/${userid}`);
+
+      if (!response.ok) {
+        throw new Error('※アカウント消去に失敗したニャン。');
+      }
+
+      const status = await response.json();
+      navigate('/login'); // ログインページに移動
+    } catch (error) {
+      console.error('※エラー:', error);
+      return 1;
+    }
   };
 
   const handleNo = () => { // 「いいえ」ボタン押下
@@ -24,6 +45,8 @@ const AccountCon = () => {
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
   };
+
+  
 
   const handlead1 = () => {
     //外部サイトへ飛ぶ(新しいタブで)

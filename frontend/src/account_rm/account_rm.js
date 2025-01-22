@@ -17,7 +17,17 @@ const RmAccount = () => {
     return passwordRegex.test(password);
   };
 
-  const handleOkClick = () => {
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return '';
+  };
+
+  const userid = getCookie('userid');
+
+
+  const handleOkClick = async () => {
     if (!email) {
       setErrorMessage('※メールアドレスを入力してワン。');
       return;
@@ -32,7 +42,29 @@ const RmAccount = () => {
       setErrorMessage('※パスワードは半角英数字8～16文字で入力してワン。');
       return;
     }
-    navigate('/account_con');
+    try {
+      const response = await fetch('http://localhost:8080/userinfo/account/login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      
+      if (data !== -1) {  // 認証失敗
+        setErrorMessage('');
+        navigate('/account_con');
+      } else {  // 認証成功
+        setErrorMessage('※入力情報が間違ってるニャン。');
+        return;
+      }
+    } catch (error) {
+      setErrorMessage('※サーバーとの通信に失敗したワン。');
+    }
+   
   };
 
 
@@ -53,6 +85,10 @@ const RmAccount = () => {
     //外部サイトへ飛ぶ(新しいタブで)
     window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_iwata.shtml', '_blank', 'noopener noreferrer')
   };
+
+
+
+  
 
   return (
     <div className={fontstyles.fontFamily}>
