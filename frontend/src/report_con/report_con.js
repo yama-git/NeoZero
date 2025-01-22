@@ -99,6 +99,10 @@ const ReportCon = () => {
     return null;
   }
 
+  const handlead1 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yokoyama.shtml', '_blank', 'noopener noreferrer')
+  };
 
 
   return (
@@ -174,10 +178,15 @@ const ReportCon = () => {
 
         <div className={styles.right}>
           <div className={styles.advertisement2}>
+          <button
+            className={styles.adbutton}
+              onClick={handlead1}
+        >
             <img
               src={Right1Img}
               alt="広告"
             />
+             </button>
           </div>
         </div>
       </div>

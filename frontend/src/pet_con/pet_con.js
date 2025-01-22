@@ -30,7 +30,7 @@ const PetCon = () => {
 
   const handlead2 = () => {
     //外部サイトへ飛ぶ(新しいタブで)
-    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_iwata.shtml', '_blank', 'noopener noreferrer')
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_takeda.shtml', '_blank', 'noopener noreferrer')
   };
 
   return (
@@ -82,7 +82,7 @@ const PetCon = () => {
       <div className={styles.right}>
         <div className={styles.advertisement2}>
           <button
-            className={styles.adbutton}
+            className={styles.adbutton2}
               onClick={handlead2}
             >
           <img

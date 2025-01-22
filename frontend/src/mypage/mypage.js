@@ -33,6 +33,11 @@ const MyPage = () => {
     fontFamily: 'CraftMincho, serif'
   };
 
+  const handlead1 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_onishi.shtml', '_blank', 'noopener noreferrer')
+  };
+
 
   return (
     <div className={fontstyles.fontFamily}>
@@ -149,10 +154,15 @@ const MyPage = () => {
 
       <div className={styles.right}>
         <div className={styles.advertisement}>
-          <img
+        <button
+            className={styles.adbutton}
+              onClick={handlead1}
+        >
+        <img
             src={MypageImg} // 広告サンプル
             alt="MypageImg" // 代替テキスト
           />
+           </button>
         </div>
       </div>
 

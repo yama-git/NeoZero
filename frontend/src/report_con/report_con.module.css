@@ -218,3 +218,10 @@
 .noButton:hover {
     background: #6b92fc;
 }
+
+.adbutton{
+    height: 100%;
+    width: 100%; 
+    background: #FFD5EC; /* 背景色 */ 
+    border: none; /* 枠線 */
+}
