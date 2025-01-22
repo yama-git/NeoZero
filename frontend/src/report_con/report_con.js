@@ -104,6 +104,11 @@ const ReportCon = () => {
     window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yokoyama.shtml', '_blank', 'noopener noreferrer')
   };
 
+  const handlead2 = () => {
+    //外部サイトへ飛ぶ(新しいタブで)
+    window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yoshida.shtml', '_blank', 'noopener noreferrer')
+  };
+
 
   return (
     <div className={fontstyles.fontFamily}>
@@ -117,10 +122,15 @@ const ReportCon = () => {
             トップページへ戻る
           </button>
           <div className={styles.advertisement}>
+          <button
+            className={styles.adbutton}
+              onClick={handlead2}
+        >
             <img
               src={Left1Img}
               alt="広告"
             />
+            </button>
           </div>
         </div>
 
