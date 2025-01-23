@@ -29,17 +29,17 @@ const RmAccount = () => {
 
   const handleOkClick = async () => {
     if (!email) {
-      setErrorMessage('※メールアドレスを入力してワン。');
+      setErrorMessage('※メールアドレスを入力してくださいワン。');
       return;
     }
 
     if (!password) {
-      setErrorMessage('※パスワードを入力してニャン。');
+      setErrorMessage('※パスワードを入力してくださいニャン。');
       return;
     }
 
     if (!validatePassword(password)) {
-      setErrorMessage('※パスワードは半角英数字8～16文字で入力してワン。');
+      setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいワン。');
       return;
     }
     try {
@@ -75,8 +75,7 @@ const RmAccount = () => {
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
   };
-
-  const handlead1 = () => {
+ const handlead1 = () => {
     //外部サイトへ飛ぶ(新しいタブで)
     window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_harada.shtml', '_blank', 'noopener noreferrer')
   };
@@ -85,11 +84,6 @@ const RmAccount = () => {
     //外部サイトへ飛ぶ(新しいタブで)
     window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_onishi.shtml', '_blank', 'noopener noreferrer')
   };
-
-
-
-  
-
   return (
     <div className={fontstyles.fontFamily}>
       <div className={styles.body}>
@@ -124,6 +118,7 @@ const RmAccount = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={styles.input}
+            placeholder="メールアドレス"
           />
           <label>パスワード</label>
           <input
@@ -131,7 +126,8 @@ const RmAccount = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={styles.input}
-          />
+            placeholder="パスワード"
+            />
 
           <p className={styles.passwordHint}>
             ※半角英数字8～16文字

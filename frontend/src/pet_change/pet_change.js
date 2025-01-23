@@ -5,19 +5,20 @@ import styles from './pet_change.module.css';
 import fontstyles from '../font/font.module.css';
 import Left1Img from '../image/Left1.png'; //259:550
 import Right1Img from '../image/Right1.png'; //259:750
-
+import Cookies from 'js-cookie'; // ここでインポート
 const PetChange = () => {
   const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState(null);
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [imageFile, setImageFile] = useState(null); // 画像ファイルを保存するためのstate
+  const userId = Cookies.get('userid');
   const handleTop = () => {
     navigate('/top');
   };
 
-  const handlepetcon = () => {
+  const handlepetcon = async () => {
     // バリデーションチェック
     // if (!imagePreview) {
     //   setErrorMessage('※画像は必須項目ニャン。');
@@ -33,10 +34,38 @@ const PetChange = () => {
       setErrorMessage('※フリーコメントは100字以内で入力してニャン。');
       return;
     }
-
-    // エラーがなければ遷移
+    // エラーメッセージがなければデータを送信
     setErrorMessage('');
-    navigate('/pet_con');
+
+    // 送信するデータをまとめる
+    const formData = {
+      user_id: userId, // ユーザーIDを追加
+      user_name: name,
+      user_comment: comment,
+      file: imageFile ? URL.createObjectURL(imageFile) : null, // ファイルをURLに変換
+    };
+
+    navigate('/pet_con',{state:{ formData } }); // 投稿消去画面に移動
+    // try {
+    //   // const senddata = JSON.stringify ({userId, name, comment});
+    //   const response = await fetch('http://localhost:8080/userinfo/info/change', {
+    //     method: 'PUT',
+    //     body: formData,
+    //   });
+
+    //   if (response.ok) {
+    //     navigate('/pet_con'); // 成功したら遷移
+    //   } else {
+    //     const data = await response.json();
+    //     setErrorMessage(data.error || 'データの送信に失敗しました。');
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    //   setErrorMessage('ネットワークエラーが発生しました。');
+    //}
+    // // エラーがなければ遷移
+    // setErrorMessage('');
+    // navigate('/pet_con');
   };
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
@@ -51,6 +80,7 @@ const PetChange = () => {
         setErrorMessage(''); // 画像が設定されたらエラーメッセージをクリア
       };
       reader.readAsDataURL(file);
+      setImageFile(file); // 画像ファイルを保存
     }
   };
 

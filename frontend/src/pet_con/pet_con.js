@@ -1,7 +1,7 @@
 //ペット変更確認画面
-import React from 'react'; // React用
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'; // ページ遷移用
 import fontstyles from '../font/font.module.css';
-import { useNavigate } from 'react-router-dom'; // ページ遷移用
 import styles from './pet_con.module.css'; // CSSモジュール(cssファイルかく)
 import Left1Img from '../image/Left1.png'; //259:550
 import Right1Img from '../image/Right1.png'; //259:750
@@ -9,14 +9,50 @@ import Right1Img from '../image/Right1.png'; //259:750
 
 const PetCon = () => {
   //ここから下変える
-  const navigate = useNavigate(); // ページ遷移用
+  const navigate = useNavigate();
+  const location = useLocation(); // useLocation を使って、state を取得
+  const { formData } = location.state || {}; // state から formData を受け取る
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleTop = () => { // 「トップページへ戻る」ボタン押下
+  const handleTop = () => {
     navigate('/top'); // トップページに移動
   };
 
-  const handlepet = () => { // 「OK」ボタン押下
-    navigate('/pet_change'); // ペット変更画面に遷移
+  const handlepet = async () => { // 「OK」ボタン押下
+        // ここで送信するデータをオブジェクトとして扱う
+        const formDataToSend = new FormData();
+        formDataToSend.append('user_id', formData.user_id);
+        formDataToSend.append('user_name', formData.user_name);
+        formDataToSend.append('user_comment', formData.user_comment);
+        
+        if (formData.file) {
+          const fileBlob = formData.file;  // `File` オブジェクトを直接使用
+          const fileName = formData.file.name; // ファイル名を取得
+           
+          formDataToSend.append('file', fileBlob, fileName);
+        }
+    
+        try {
+          const response = await fetch('http://localhost:8080/userinfo/info/change', {
+            method: 'PUT',
+            body: formDataToSend,
+          });
+    
+          if (response.ok) {
+            alert('変更が完了しました。');
+            navigate('/top');
+          } else {
+            const data = await response.json();
+            setErrorMessage(data.error || 'データの送信に失敗しました。');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          setErrorMessage('ネットワークエラーが発生しました。');
+        }
+      };
+    
+      const handleCancel = () => {
+        navigate('/pet_change'); // 変更をキャンセルした場合、ペット変更画面に戻る
   };
 
   const inputStyle = {
@@ -77,6 +113,8 @@ const PetCon = () => {
           >
             いいえ
           </button>
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+          </div>
         </div>
       </div>
       <div className={styles.right}>
@@ -93,7 +131,6 @@ const PetCon = () => {
         </div>
       </div>
 
-    </div>
     </div>
   );
 };

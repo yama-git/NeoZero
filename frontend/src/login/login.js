@@ -49,7 +49,7 @@ const Login = () => {
 
     // バックエンドへデータを送信
     try {
-      const response = await fetch('http://localhost:8080/userinfo/account/login', {
+      const response = await fetch('http://54.163.169.153:8000/userinfo/account/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

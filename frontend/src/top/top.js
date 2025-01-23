@@ -1,36 +1,36 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useState ,useCallback} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './top.module.css';
 import fontstyles from '../font/font.module.css';
 import pawloverslogoImg from './pawlovers.png';
 import TopleftImg from '../image/Topleft.png';
 import ToprightImg from '../image/Topright.png';
-
+import Cookies from 'js-cookie';
 const TopPage = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const handlePost = () => {
-    navigate('/post');
-  };
-
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return '';
-  };
+  // const getCookie = (name) => {
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${name}=`);
+  //   if (parts.length === 2) return parts.pop().split(';').shift();
+  //   return '';
+  // };
 
   const userid = getCookie('userid');
+  const handlePost = () => {
+    // console.log(userId); // ここでuserIdが正しく取得できているかを確認
+    navigate('/post',{state:{ userid } });
+  };
+
 
   // 以下いいね用の関数
   const fetchGoodStatus = useCallback(async (postId) => {
     if (!userid || !postId) return 1;
 
     try {
-      const response = await fetch(`http://localhost:8080/post/goodstatus/${userid}/${postId}`);
+      const response = await fetch(`http://54.163.169.153:8000/post/goodstatus/${userid}/${postId}`);
       if (!response.ok) {
         throw new Error('※いいね状態の取得に失敗したニャン。');
       }
@@ -43,11 +43,11 @@ const TopPage = () => {
     }
   }, [userid]);
 
-  const handleGood = useCallback(async (postId) => {
+  const handleGood = (async (postId) => { //useCallback
     if (!userid || !postId) return;
 
     try {
-      const response = await fetch('http://localhost:8080/post/good', {
+      const response = await fetch('http://54.163.169.153:8000/post/good', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const TopPage = () => {
     if (!userid || !postId) return 1;
 
     try {
-      const response = await fetch(`http://localhost:8080/post/followstatus/${userid}/${postId}`);
+      const response = await fetch(`http://54.163.169.153:8000/post/followstatus/${userid}/${postId}`);
 
       if (!response.ok) {
         throw new Error('※フォロー状態の取得に失敗したニャン。');
@@ -102,7 +102,7 @@ const TopPage = () => {
     if (!userid || !followedid) return;
 
     try {
-      const response = await fetch('http://localhost:8080/follow', {
+      const response = await fetch('http://54.163.169.153:8000/follow', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid, followedid }),
@@ -140,6 +140,10 @@ const TopPage = () => {
     navigate('/mypage');
   };
 
+   handleFollow = () => {
+    // フォロー機能用の空関数を維持
+  };
+
   const handleReport = (postId) => {
     navigate(`/report_con`, { state: { postId } });
   }
@@ -171,7 +175,7 @@ const TopPage = () => {
 
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:8080/post/new');
+        const response = await fetch('http://54.163.169.153:8000/post/new');
         if (!response.ok) {
           throw new Error('※投稿の取得に失敗したニャン。');
         }
@@ -254,7 +258,7 @@ const TopPage = () => {
                 <div className={styles.post}>
                   <div className={styles.picture}>
                     <img
-                      src={`http://localhost:8080/${post.image_url}`} // 修正された部分
+                      src={`http://54.163.169.153:8000/${post.image_url}`} // 修正された部分
                       alt={`投稿 ${post.id}`}
                       className={styles.postImage}
                       onError={(e) => {

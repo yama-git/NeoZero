@@ -39,7 +39,7 @@ const AccountReg = () => {
 
     //入力されてたら
     try {
-      const response = await fetch('http://localhost:8080/userinfo/account/register', {
+      const response = await fetch('http://54.163.169.153:8000/userinfo/account/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,15 +1,15 @@
-//å¯¾è±¡ãƒ¦ãƒ¼ã‚¶ã®æŠ•ç¨¿ç”»é¢
-import React, { useState, useEffect, useCallback } from 'react'; // Reactç”¨
-import { useNavigate, useParams } from 'react-router-dom'; // ãƒšãƒ¼ã‚¸é·ç§»ç”¨
-import styles from './other_users.module.css'; // CSSãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
+//‘ÎÛƒ†[ƒU‚Ì“Še‰æ–Ê
+import React, { useState, useEffect, useCallback } from 'react'; // React—p
+import { useNavigate, useParams } from 'react-router-dom'; // ƒy[ƒW‘JˆÚ—p
+import styles from './other_users.module.css'; // CSSƒ‚ƒWƒ…[ƒ‹
 import fontstyles from '../font/font.module.css';
 import Left2Img from '../image/Left2.png'; //259:550
 import Right2Img from '../image/Right2.png'; //259:750
 
 
 const OtherUsers = () => {
-  const navigate = useNavigate(); // ãƒšãƒ¼ã‚¸é·ç§»ç”¨
-  const { id } = useParams(); // ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å–å¾—
+  const navigate = useNavigate(); // ƒy[ƒW‘JˆÚ—p
+  const { id } = useParams(); // ƒpƒ‰ƒ[ƒ^Žæ“¾
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,11 +22,16 @@ const OtherUsers = () => {
   };
   const userid = getCookie('userid');
 
-  const handleTop = () => { // ã€Œãƒˆãƒƒãƒ—ãƒšãƒ¼ã‚¸ã«æˆ»ã‚‹ã€ãƒœã‚¿ãƒ³æŠ¼ä¸‹
-    navigate('/top'); // ãƒˆãƒƒãƒ—ãƒšãƒ¼ã‚¸ã«ç§»å‹•
+  const handleTop = () => { // uƒgƒbƒvƒy[ƒW‚É–ß‚évƒ{ƒ^ƒ“‰Ÿ‰º
+    navigate('/top'); // ƒgƒbƒvƒy[ƒW‚ÉˆÚ“®
+  };
+  const handleFollow = () => { // uƒtƒHƒ[vƒ{ƒ^ƒ“‰Ÿ‰º
   };
 
- 
+  const handleReport = () => { // u’Ê•ñvƒ{ƒ^ƒ“‰Ÿ‰º
+    navigate('/report_con'); 
+  };
+
 
   const inputStyle = {
     fontFamily: 'CraftMincho, serif'
@@ -43,7 +48,7 @@ const OtherUsers = () => {
           setIsLoading(true);
           const response = await fetch(`http://localhost:8080/post/get/${id}`);
           if (!response.ok) {
-            throw new Error('æŠ•ç¨¿ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸ');
+            throw new Error('“Še‚ÌŽæ“¾‚ÉŽ¸”s‚µ‚Ü‚µ‚½');
           }
           const data = await response.json();
           setPosts(data.posts);
@@ -58,12 +63,12 @@ const OtherUsers = () => {
     }, [id]);
     
     const handlead1 = () => {
-      //å¤–éƒ¨ã‚µã‚¤ãƒˆã¸é£›ã¶(æ–°ã—ã„ã‚¿ãƒ–ã§)
+      //ŠO•”ƒTƒCƒg‚Ö”ò‚Ô(V‚µ‚¢ƒ^ƒu‚Å)
       window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yoshida.shtml', '_blank', 'noopener noreferrer')
     };
   
     const handlead2 = () => {
-      //å¤–éƒ¨ã‚µã‚¤ãƒˆã¸é£›ã¶(æ–°ã—ã„ã‚¿ãƒ–ã§)
+      //ŠO•”ƒTƒCƒg‚Ö”ò‚Ô(V‚µ‚¢ƒ^ƒu‚Å)
       window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_takeuchi.shtml', '_blank', 'noopener noreferrer')
     };
   return (
@@ -71,12 +76,12 @@ const OtherUsers = () => {
       <div className={styles.body}>
 
       <div className={styles.left}>
-        <button // ã€Œãƒˆãƒƒãƒ—ãƒšãƒ¼ã‚¸ã¸æˆ»ã‚‹ã€ãƒœã‚¿ãƒ³
+        <button // uƒgƒbƒvƒy[ƒW‚Ö–ß‚évƒ{ƒ^ƒ“
           className={styles.topButton}
           onClick={handleTop}
           style={inputStyle}
         >
-          ãƒˆãƒƒãƒ—ãƒšãƒ¼ã‚¸ã¸æˆ»ã‚‹
+          ƒgƒbƒvƒy[ƒW‚Ö–ß‚é
         </button>
 
         <div className={styles.advertisement}>
@@ -85,8 +90,8 @@ const OtherUsers = () => {
               onClick={handlead1}
             >
           <img
-            src={Left2Img} // åºƒå‘Šã‚µãƒ³ãƒ—ãƒ«
-            alt="Left2Img" // ä»£æ›¿ãƒ†ã‚­ã‚¹ãƒˆ
+            src={Left2Img} // LƒTƒ“ƒvƒ‹
+            alt="Left2Img" // ‘ã‘ÖƒeƒLƒXƒg
           />
           </button>
         </div>
@@ -94,21 +99,20 @@ const OtherUsers = () => {
 
       <div className={styles.center}>
       {isLoading ? (
-            <div>èª­ã¿è¾¼ã¿ä¸­...</div> // ãƒ­ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ä¸­ã®è¡¨ç¤º
+            <div>“Ç‚Ýž‚Ý’†...</div> // ƒ[ƒfƒBƒ“ƒO’†‚Ì•\Ž¦
           ) : posts.length === 0 ? (
-            <div>æŠ•ç¨¿ãŒã‚ã‚Šã¾ã›ã‚“</div> // æŠ•ç¨¿ãŒãªã„å ´åˆã®è¡¨ç¤º
+            <div>“Še‚ª‚ ‚è‚Ü‚¹‚ñ</div> // “Še‚ª‚È‚¢ê‡‚Ì•\Ž¦
           ) : (
             <>
-        <div className={styles.title}>{posts[0].name}ã®ãƒšãƒ¼ã‚¸</div>
+        <div className={styles.title}>{posts[0].name}‚Ìƒy[ƒW</div>
           <div className={styles.media}>
             {posts.map((post) => (
               <div key={post.id} className={styles.white}>           
                 <div className={styles.post}>
                   <div className={styles.picture}>{post.image}</div>
                   
-                  <div className={styles.info}>
-                    
-                    <div className={styles.comment}>{post.comment}ãƒ¯ãƒ³</div>
+                  <div className={styles.info}>                 
+                    <div className={styles.comment}>{post.comment}ƒƒ“</div>
                   </div>
                 </div>
               </div> 
@@ -125,8 +129,8 @@ const OtherUsers = () => {
               onClick={handlead2}
             >
           <img
-            src={Right2Img} // åºƒå‘Šã‚µãƒ³ãƒ—ãƒ«
-            alt="Right2Img" // ä»£æ›¿ãƒ†ã‚­ã‚¹ãƒˆ
+            src={Right2Img} // LƒTƒ“ƒvƒ‹
+            alt="Right2Img" // ‘ã‘ÖƒeƒLƒXƒg
           />
           </button>
         </div>
