@@ -16,9 +16,16 @@ const AccountReg = () => {
 
   const handleOk =async () => {
     const passwordRegex = /^[a-zA-Z0-9]{8,16}$/; // パスワードの形式チェック
+    const emailregex = /^[a-zA-Z0-9]{4,10}@gmail\.com$/;
+    
 
     if (!email || !name || !password || !passwordConfirm) {
       setErrorMessage("※必須項目が入力されてないニャン。");
+      return;
+    }
+    
+    if(!emailregex.test(email)){
+      setErrorMessage("※メールアドレスは<任意の半角英数字4-10文字>@gmail.comで登録するワン。");
       return;
     }
 
@@ -54,7 +61,7 @@ const AccountReg = () => {
           setErrorMessage('');
           navigate('/');
         } else {  // 認証失敗
-          setErrorMessage('※入力情報が間違っているニャン。');
+          setErrorMessage('※そのメールアドレスはすでに登録されているワン。');
         }
       } else {
         setErrorMessage(data.error || '※ログインに失敗したワン。');

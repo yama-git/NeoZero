@@ -21,6 +21,10 @@ const MailChange = () => {
     return passwordRegex.test(password);
   };
 
+  const emailregex = /^[a-zA-Z0-9]{4,10}@gmail\.com$/;
+  
+  
+
   const handleTop = () => {
     navigate('/top');
   };
@@ -40,6 +44,11 @@ const MailChange = () => {
 
     if (!currentPassword) {
       setErrorMessage('※パスワードを入力してニャン。');
+      return;
+    }
+
+    if(!emailregex.test(newEmail)){
+      setErrorMessage("※メールアドレスは<任意の半角英数字4-10文字>@gmail.comで入力するワン。");
       return;
     }
 

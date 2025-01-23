@@ -32,7 +32,8 @@ const Login = () => {
     const passwordRegex = /^[a-zA-Z0-9]{8,16}$/;
     return passwordRegex.test(password);
   };
-
+  const emailregex = /^[a-zA-Z0-9]{4,10}@gmail\.com$/;
+    
   const handleLogin = async () => {
     if (!email) { // メールアドレスが未入力のとき
       setErrorMessage('※メールアドレスを入力してくださいニャン。');
@@ -42,6 +43,10 @@ const Login = () => {
       return;
     }
 
+    if(!emailregex.test(email)){
+      setErrorMessage("※メールアドレスは<任意の半角英数字4-10文字>@gmail.comで入力するワン。");
+      return;
+    }
     if (!validatePassword(password)) {
       setErrorMessage('※パスワードは半角英数字8～16文字で入力してくださいニャン。');
       return;
