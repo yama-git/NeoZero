@@ -46,7 +46,7 @@ const AccountReg = () => {
 
     //入力されてたら
     try {
-      const response = await fetch('http://neozero.metifie.com/userinfo/account/register', {
+      const response = await fetch('https://neozero.metifie.com/userinfo/account/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
