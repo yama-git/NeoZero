@@ -13,7 +13,7 @@ const MyPage = () => {
   const userId = Cookies.get('userid'); 
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPosts = async (userid) => {
       try {
         const response = await fetch(`https://neozero.metifie.com/post/get/${userId}`);
         const data = await response.json();
