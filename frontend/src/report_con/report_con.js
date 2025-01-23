@@ -31,8 +31,8 @@ const ReportCon = () => {
   const handleok = async (reportuserid) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('https://neozero.metifie.com/report/count', {
-        method: 'POST',
+      const response = await fetch('https://neozero.metifie.com/report/countup', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
