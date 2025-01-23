@@ -142,9 +142,6 @@ const TopPage = () => {
     navigate('/mypage');
   };
 
-   handleFollow = () => {
-    // フォロー機能用の空関数を維持
-  };
 
   const handleReport = (postId) => {
     navigate(`/report_con`, { state: { postId } });

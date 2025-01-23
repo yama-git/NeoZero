@@ -24,6 +24,7 @@ const PetCon = () => {
         formDataToSend.append('user_id', formData.user_id);
         formDataToSend.append('user_name', formData.user_name);
         formDataToSend.append('user_comment', formData.user_comment);
+        formDataToSend.append('file', fileInput.files[0]);
         
         if (formData.file) {
           const fileBlob = formData.file;  // `File` オブジェクトを直接使用
@@ -108,7 +109,7 @@ const PetCon = () => {
           </button>
           <button
             className={styles.nobutton}
-            onClick={handlepet}
+            onClick={handleCancel}
             style={inputStyle}
           >
             いいえ

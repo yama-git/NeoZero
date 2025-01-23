@@ -53,7 +53,7 @@ const Nyakama = () => {
   };
 
   useEffect(() => {
-    const fetchFollowList = async () => {
+    const fetchFollowList = async (userid) => {
       if (!userid) {
         setIsLoading(false);
         return;
