@@ -82,7 +82,7 @@ formDataMap.forEach((value, key) => {
 });
 
     try {
-      const response = await fetch('http://54.163.169.153:8000/post', {
+      const response = await fetch('http://neozero.metifie.com/post', {
         method: 'POST',
         body: fd,
       });

@@ -43,7 +43,7 @@ const RmAccount = () => {
       return;
     }
     try {
-      const response = await fetch('http://54.163.169.153:8000/userinfo/account/login', {
+      const response = await fetch('http://neozero.metifie.com/userinfo/account/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

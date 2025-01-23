@@ -48,7 +48,7 @@ const PetChange = () => {
     navigate('/pet_con',{state:{ formData } }); // 投稿消去画面に移動
     // try {
     //   // const senddata = JSON.stringify ({userId, name, comment});
-    //   const response = await fetch('http://54.163.169.153:8000/userinfo/info/change', {
+    //   const response = await fetch('http://neozero.metifie.com/userinfo/info/change', {
     //     method: 'PUT',
     //     body: formData,
     //   });

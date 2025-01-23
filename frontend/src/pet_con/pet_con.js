@@ -33,7 +33,7 @@ const PetCon = () => {
         }
     
         try {
-          const response = await fetch('http://54.163.169.153:8000/userinfo/info/change', {
+          const response = await fetch('http://neozero.metifie.com/userinfo/info/change', {
             method: 'PUT',
             body: formDataToSend,
           });
