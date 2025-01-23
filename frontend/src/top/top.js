@@ -32,7 +32,7 @@ const TopPage = () => {
     if (!userid || !postId) return 1;
 
     try {
-      const response = await fetch(`http://neozero.metifie.com/post/goodstatus/${userid}/${postId}`);
+      const response = await fetch(`https://neozero.metifie.com/post/goodstatus/${userid}/${postId}`);
       if (!response.ok) {
         throw new Error('※いいね状態の取得に失敗したニャン。');
       }
@@ -49,7 +49,7 @@ const TopPage = () => {
     if (!userid || !postId) return;
 
     try {
-      const response = await fetch('http://neozero.metifie.com/post/good', {
+      const response = await fetch('https://neozero.metifie.com/post/good', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const TopPage = () => {
     if (!userid || !postId) return 1;
 
     try {
-      const response = await fetch(`http://neozero.metifie.com/post/followstatus/${userid}/${postId}`);
+      const response = await fetch(`https://neozero.metifie.com/post/followstatus/${userid}/${postId}`);
 
       if (!response.ok) {
         throw new Error('※フォロー状態の取得に失敗したニャン。');
@@ -104,7 +104,7 @@ const TopPage = () => {
     if (!userid || !followedid) return;
 
     try {
-      const response = await fetch('http://neozero.metifie.com/follow', {
+      const response = await fetch('https://neozero.metifie.com/follow', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid, followedid }),
@@ -177,7 +177,7 @@ const TopPage = () => {
 
       try {
         setIsLoading(true);
-        const response = await fetch('http://neozero.metifie.com/post/new');
+        const response = await fetch('https://neozero.metifie.com/post/new');
         if (!response.ok) {
           throw new Error('※投稿の取得に失敗したニャン。');
         }
@@ -260,7 +260,7 @@ const TopPage = () => {
                 <div className={styles.post}>
                   <div className={styles.picture}>
                     <img
-                      src={`http://neozero.metifie.com/${post.image_url}`} // 修正された部分
+                      src={`https://neozero.metifie.com/${post.image_url}`} // 修正された部分
                       alt={`投稿 ${post.id}`}
                       className={styles.postImage}
                       onError={(e) => {

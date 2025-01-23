@@ -67,7 +67,7 @@ const MailChange = () => {
     
     const userid = getCookie('userid');
     try {
-      const response = await fetch('http://neozero.metifie.com/userinfo/email/change', {
+      const response = await fetch('https://neozero.metifie.com/userinfo/email/change', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

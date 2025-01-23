@@ -15,7 +15,7 @@ const MyPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`http://neozero.metifie.com/post/get/${userId}`);
+        const response = await fetch(`https://neozero.metifie.com/post/get/${userId}`);
         const data = await response.json();
         if (data && data.posts) {
           setPosts(data.posts); // 取得した投稿データをstateに格納

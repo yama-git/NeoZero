@@ -46,7 +46,7 @@ const OtherUsers = () => {
   
         try {
           setIsLoading(true);
-          const response = await fetch(`http://neozero.metifie.com/post/get/${id}`);
+          const response = await fetch(`https://neozero.metifie.com/post/get/${id}`);
           if (!response.ok) {
             throw new Error('���e�̎擾�Ɏ��s���܂���');
           }

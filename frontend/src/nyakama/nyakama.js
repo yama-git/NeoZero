@@ -31,7 +31,7 @@ const Nyakama = () => {
       if (!userid || !followedid) return;
     
       try {
-        const response = await fetch('http://neozero.metifie.com/follow', {
+        const response = await fetch('https://neozero.metifie.com/follow', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userid, followedid }),
@@ -61,7 +61,7 @@ const Nyakama = () => {
 
       try {
         setIsLoading(true);
-        const response = await fetch(`http://neozero.metifie.com/followlist/${userid}`);
+        const response = await fetch(`https://neozero.metifie.com/followlist/${userid}`);
         if (!response.ok) {
           throw new Error('※フォローリストの取得に失敗したワン');
         }

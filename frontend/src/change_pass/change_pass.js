@@ -83,7 +83,7 @@ const ChangePass = () => {
 
     const userid = getCookie('userid');
     try {
-      const response = await fetch('http://neozero.metifie.com/userinfo/pass/change', {
+      const response = await fetch('https://neozero.metifie.com/userinfo/pass/change', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
