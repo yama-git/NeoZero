@@ -54,7 +54,7 @@ const Login = () => {
 
     // バックエンドへデータを送信
     try {
-      const response = await fetch('http://54.163.169.153:8000/userinfo/account/login', {
+      const response = await fetch('http://neozero.metifie.com/userinfo/account/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -83,7 +83,7 @@ const Login = () => {
   };
 
   const inputStyle = {
-    fontFamily: 'CraftMincho, serif'
+    fontFamily: 'CraftMincho, serif',
   };
 
   return (
@@ -138,7 +138,7 @@ const Login = () => {
           </button>
 
           <p className={styles.new}>
-            ・・・・・・・・・・・・初めての方はこっちワン・・・・・・・・・・・・
+            ・・・・・・・・・・初めての方はこっちワン・・・・・・・・・・・・
           </p>
 
           <button
