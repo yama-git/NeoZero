@@ -10,15 +10,7 @@ import datetime
 
 app = FastAPI()
 router = APIRouter()
-origins = ["*"]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 ## AdminRegister
 @router.post(path="/admin/account/register")

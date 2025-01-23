@@ -7,15 +7,7 @@ import api.schemas.user_post as schema
 
 app = FastAPI()
 router = APIRouter()
-origins = ["*"]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 ## Post

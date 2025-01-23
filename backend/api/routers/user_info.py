@@ -10,13 +10,7 @@ app = FastAPI()
 router = APIRouter()
 app.include_router(router)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # フロントエンドのオリジン
-    allow_credentials=True,                    # credentialsを許可
-    allow_methods=["*"],                       # 全HTTPメソッドを許可
-    allow_headers=["*"],                       # 全ヘッダーを許可
-)
+
 
 ## UserRegister
 @router.post(path="/userinfo/account/register")
