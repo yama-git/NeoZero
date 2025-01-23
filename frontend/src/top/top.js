@@ -179,6 +179,7 @@ const TopPage = () => {
           throw new Error('※投稿の取得に失敗したニャン。');
         }
         const data = await response.json();
+        console.log(data)
         const postsWithStatuses = await Promise.all(
           data.posts.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.id);

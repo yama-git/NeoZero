@@ -110,8 +110,8 @@ async def GetNewPost():
         return -1
     posts = [
         {
-            "postid":post.id,
-            "title": post.title,
+            "id":post.id,
+            "userid": post.user_id,
             "caption": post.caption,
             "goodcount": post.goodcount,
             "postid": post.image
