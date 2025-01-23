@@ -1,6 +1,6 @@
 import sys
-import api.models.models as models
-import api.db as databases
+import models.models as models
+import db as databases
 
 sys.dont_write_bytecode = True
 
@@ -24,16 +24,16 @@ async def GetConfirmConbination(userid, postid):
     else:
         return good.flag
     
-## Good　（0:いいね解除中で作成）
+## Good
 async def Good(userid, postid):
     session = databases.create_new_session()
     good = models.Good()
     good.user_id = userid
     good.post_id = postid
-    good.flag = 0
+    good.flag = 1
     session.add(good)
     session.commit()
-    return good.flag
+    return 0
 
 ## ChangeFlag（0:いいね解除中, 1:いいね中）
 async def ChangeFlag(userid, postid):
@@ -47,15 +47,4 @@ async def ChangeFlag(userid, postid):
     else:
         good.flag = not good.flag
     session.commit()
-    return good.flag
-
-## GoodStatus（0:いいね解除中, 1:いいね中）
-async def GoodStatus(userid, postid):
-    session = databases.create_new_session()
-    good = session.query(models.Good).\
-                filter(models.Good.user_id == userid, 
-                       models.Good.post_id == postid).\
-                first()
-    if good == None:
-        return 0
-    return good.flag
+    return 0

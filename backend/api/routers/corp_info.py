@@ -1,8 +1,8 @@
 from fastapi import APIRouter, FastAPI, Depends, Path, HTTPException
-import api.models.models as models
+import models.models as models
 from fastapi.middleware.cors import CORSMiddleware
-import api.cruds.corp_info as handle_db
-import api.cruds.images as image_db
+import cruds.corp_info as handle_db
+import cruds.images as image_db
 import datetime
 
 app = FastAPI()

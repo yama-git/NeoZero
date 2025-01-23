@@ -1,20 +1,70 @@
-from fastapi import APIRouter, FastAPI, Depends, Path, HTTPException, Query
-import api.models.models as models
+from fastapi import APIRouter, FastAPI, Depends, Path, HTTPException, Query,UploadFile,File,Form
+import models.models as models
 from fastapi.middleware.cors import CORSMiddleware
-import api.cruds.images as image_db
-import api.cruds.user_post as handle_db
-import api.schemas.user_post as schema
+import cruds.images as image_db
+import cruds.user_post as handle_db
+import datetime
+import time
+import uuid
+
+
+# aws s3
+import boto3
+from botocore.exceptions import BotoCoreError, ClientError
+
+# boto3の変数定義
+BUCKET_NAME = "neozero"
+REGION_NAME = "us-east-1"
+s3_client = boto3.client(
+    "s3", 
+    region_name=REGION_NAME)
+
 
 app = FastAPI()
 router = APIRouter()
 
 
-
-## Post
+## Post  切り取ったやつ　image: str, 
 @router.post(path="/post")
-async def Post(data: schema.PostRequest):
-    postid = handle_db.Post(data.userid, data.title, data.caption)
-    return postid
+async def Post(user_id: str = Form(None), title: str = Form(None), caption: str = Form(None),file:UploadFile = File(...)):
+    print(f"Received user_id: {user_id}")  # ここでuser_idの値を確認
+    print(f"Received titile: {title}")  # ここでuser_idの値を確認
+    print(f"Received caption: {caption}")  # ここでuser_idの値を確認
+
+    try:
+        # # ファイル読み取り
+        file_content = await file.read()
+        # UUIDを作成する．
+        timestanp = int(time.time())
+        unique_id = uuid.uuid4()
+        # S3のファイル識別子
+        s3_key = f"{timestanp}_{unique_id}/{file.filename}",
+
+        # S3のファイルURLをつくる
+        file_url = f"https://{BUCKET_NAME}.s3.{REGION_NAME}.amazonaws.com/{s3_key}",
+
+        # 以下の2行はデバック用　returnで内容確認
+        title = title,
+        caption = caption,
+
+        # 関数呼び出し
+        # image_db.InsertPostImage(file_content,file.filename,file.content_type,s3_key)
+        file_url = await image_db.InsertPostImage(file_content,file.content_type,file.filename)
+        postid = handle_db.Post(user_id, title, caption, file_url)
+        return {
+            #"result" : result,
+            "message": "アップロード成功",
+            "file_url": file_url,
+            "title": title,
+            "caption": caption,
+        }
+    except (BotoCoreError, ClientError) as e:
+        return {
+            "error": f"アップロード失敗: {str(e)}",
+           # "result": result,
+            "postid": postid
+            }
+    
     # if postid == -1:
     #     return -1
     # InsertPostImageを呼び出す
@@ -29,11 +79,11 @@ async def GetOnesPost(user_id: str):
         return -1
     posts = [
         {
-            "id": post.id,
-            "name": await handle_db.GetOnesName(user_id),
+            "postId":post.id,
             "title": post.title,
-            "comment": post.caption,
-            "image": post.image
+            "caption": post.caption,
+            "goodcount": post.goodcount,
+            "postimage": post.image
         }
         for post in result
     ]
@@ -60,11 +110,11 @@ async def GetNewPost():
         return -1
     posts = [
         {
-            "id": post.id,
-            "image_url": post.image,
-            "comment": post.caption,
-            "userid": post.user_id
-            # "good": 
+            "postid":post.id,
+            "title": post.title,
+            "caption": post.caption,
+            "goodcount": post.goodcount,
+            "postid": post.image
         }
         for post in result
     ]
@@ -85,16 +135,21 @@ async def GetNewPost():
  
 
 ## DeletePost 
-@router.delete(path="/post/delete/{user_id}/{post_id}")
-async def DeletePost(user_id: str, post_id: str):
+@router.delete(path="/post/delete")
+async def DeletePost(post_id: str = Query(...)):#user_id: str, 
+    print(post_id)
     # DeletePostImageを呼び出す
     # result = await image_db.DeletePostImage(user_id, post_id)
     # if result == -1:
     #     return -1
-    result = await handle_db.DeletePost(user_id, post_id)
+    result = await handle_db.DeletePost(post_id)#user_id, 
     return result
 
-
+# GoodCount
+# @router.get(path="/post/goodcount/{post_id}")
+# async def GoodCount(post_id: str):
+#     result = await handle_db.GoodCount(post_id)
+#     return result
 
 ## Good
 # @router.put(path="/post/good/{post_id}")

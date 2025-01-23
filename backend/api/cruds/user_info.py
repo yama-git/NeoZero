@@ -2,8 +2,8 @@
 # routersのみで呼び出される
 
 import sys
-import api.models.models as models
-import api.db as databases
+import models.models as models
+import db as databases
 import hashlib
 
 sys.dont_write_bytecode = True
@@ -41,14 +41,21 @@ async def GetConfirmConbination(user_email, user_password):
     user = session.query(models.User).\
                 filter(models.User.email == user_email, 
                        models.User.password == user_password).\
-                first()       
-        
+                first()           
     if user == None:
         return -1
     else:
         return user.id
-
-
+## GetcheckUser
+async def CheckUser(user_id):
+    session = databases.create_new_session()
+    user = session.query(models.User).\
+                filter(models.User.id == user_id).\
+                first()           
+    if user == None:
+        return -1
+    else:
+        return 0
 ## GetPetInfo
 def GetPetInfo(user_id):
     session = databases.create_new_session()
@@ -57,7 +64,7 @@ def GetPetInfo(user_id):
                 first()           
     if user == None:
         return -1
-    return user.name, user.comment
+    return user.name, user.comment, user.image
 
 
 ## ChangeUserEmail
@@ -87,7 +94,7 @@ async def ChangeUserPass(user_id, new_user_password):
 
 
 ## ChangePetInfo
-def ChangePetInfo(user_id, user_name, user_comment):
+def ChangePetInfo(user_id, user_name, user_comment,user_image):
     session = databases.create_new_session()
     user = session.query(models.User).\
                 filter(models.User.id == user_id).\
@@ -98,6 +105,8 @@ def ChangePetInfo(user_id, user_name, user_comment):
         user.name = user_name
     if user_comment is not None:
         user.comment = user_comment
+    # if user_comment is not None:
+    user.image = user_image
     session.commit()
     return 0
 

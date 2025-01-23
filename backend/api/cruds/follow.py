@@ -2,8 +2,8 @@
 # routersのみで呼び出される
 
 import sys
-import api.models.models as models
-import api.db as databases
+import models.models as models
+import db as databases
 
 sys.dont_write_bytecode = True
 
@@ -39,16 +39,6 @@ async def Follow(following, followed):
     session.commit()
     return 0
 
-async def Followed(postid):
-    session = databases.create_new_session()
-    getpost = session.query(models.Post).\
-                    filter(models.Post.id == postid).\
-                    first()
-    if getpost == None:
-        return "None"
-    else:
-        return getpost.user_id
-
 ## ChangeFlag（0:フォロー解除中, 1:フォロー中）
 async def ChangeFlag(following, followed):
     session = databases.create_new_session()
@@ -67,30 +57,16 @@ async def ChangeFlag(following, followed):
 async def GetFollow(user_id):
     session = databases.create_new_session()
     user = session.query(models.Followlist).\
-                filter(models.Followlist.following == user_id, models.Followlist.flag == 1).\
-                all()
+                filter(models.Followlist.following == user_id).\
+                all()      
     if user == None:
         return -1
     user_data = []
     for follow in user:
-        followed_user = session.query(models.User).\
-                filter(models.User.id == follow.followed).\
-                first()
+        followed_user = session.query(models.User).filter(models.User.id == follow.followed).first()
         if followed_user:
             user_data.append({
-                "id": followed_user.id,
                 "name": followed_user.name,
                 "comment": followed_user.comment,
             })
     return user_data
-
-## FollowStatus（0:いいね解除中, 1:いいね中）
-async def FollowStatus(following, followed):
-    session = databases.create_new_session()
-    follow = session.query(models.Followlist).\
-                filter(models.Followlist.following == following, 
-                       models.Followlist.followed == followed).\
-                first()
-    if follow == None:
-        return 0
-    return follow.flag

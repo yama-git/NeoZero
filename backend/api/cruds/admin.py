@@ -2,8 +2,8 @@
 # routersのみで呼び出される
 
 import sys
-import api.models.models as models
-import api.db as databases
+import models.models as models
+import db as databases
 
 sys.dont_write_bytecode = True
 
