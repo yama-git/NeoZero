@@ -17,14 +17,14 @@ const RmAccount = () => {
     return passwordRegex.test(password);
   };
 
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return '';
-  };
+  // const getCookie = (name) => {
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${name}=`);
+  //   if (parts.length === 2) return parts.pop().split(';').shift();
+  //   return '';
+  // };
 
-  const userid = getCookie('userid');
+  // const userid = getCookie('userid');
 
 
   const handleOkClick = async () => {
@@ -43,7 +43,7 @@ const RmAccount = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8080/userinfo/account/login', {
+      const response = await fetch('http://54.163.169.153:8000/userinfo/account/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

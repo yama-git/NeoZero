@@ -33,7 +33,7 @@ const PetCon = () => {
         }
     
         try {
-          const response = await fetch('http://localhost:8080/userinfo/info/change', {
+          const response = await fetch('http://54.163.169.153:8000/userinfo/info/change', {
             method: 'PUT',
             body: formDataToSend,
           });

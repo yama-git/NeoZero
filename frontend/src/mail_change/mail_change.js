@@ -67,7 +67,7 @@ const MailChange = () => {
     
     const userid = getCookie('userid');
     try {
-      const response = await fetch('http://localhost:8080/userinfo/email/change', {
+      const response = await fetch('http://54.163.169.153:8000/userinfo/email/change', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

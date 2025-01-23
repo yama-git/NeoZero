@@ -1,36 +1,36 @@
-//‘ÎÛƒ†[ƒU‚Ì“Še‰æ–Ê
-import React, { useState, useEffect, useCallback } from 'react'; // React—p
-import { useNavigate, useParams } from 'react-router-dom'; // ƒy[ƒW‘JˆÚ—p
-import styles from './other_users.module.css'; // CSSƒ‚ƒWƒ…[ƒ‹
+//ï¿½ÎÛƒï¿½ï¿½[ï¿½Uï¿½Ì“ï¿½ï¿½eï¿½ï¿½ï¿½
+import React, { useState, useEffect } from 'react'; // Reactï¿½p
+import { useNavigate, useParams } from 'react-router-dom'; // ï¿½yï¿½[ï¿½Wï¿½Jï¿½Ú—p
+import styles from './other_users.module.css'; // CSSï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½
 import fontstyles from '../font/font.module.css';
 import Left2Img from '../image/Left2.png'; //259:550
 import Right2Img from '../image/Right2.png'; //259:750
 
 
 const OtherUsers = () => {
-  const navigate = useNavigate(); // ƒy[ƒW‘JˆÚ—p
-  const { id } = useParams(); // ƒpƒ‰ƒ[ƒ^Žæ“¾
+  const navigate = useNavigate(); // ï¿½yï¿½[ï¿½Wï¿½Jï¿½Ú—p
+  const { id } = useParams(); // ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½æ“¾
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return '';
-  };
-  const userid = getCookie('userid');
+  // const getCookie = (name) => {
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${name}=`);
+  //   if (parts.length === 2) return parts.pop().split(';').shift();
+  //   return '';
+  // };
+  // const userid = getCookie('userid');
 
-  const handleTop = () => { // uƒgƒbƒvƒy[ƒW‚É–ß‚évƒ{ƒ^ƒ“‰Ÿ‰º
-    navigate('/top'); // ƒgƒbƒvƒy[ƒW‚ÉˆÚ“®
+  const handleTop = () => { // ï¿½uï¿½gï¿½bï¿½vï¿½yï¿½[ï¿½Wï¿½É–ß‚ï¿½vï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    navigate('/top'); // ï¿½gï¿½bï¿½vï¿½yï¿½[ï¿½Wï¿½ÉˆÚ“ï¿½
   };
-  const handleFollow = () => { // uƒtƒHƒ[vƒ{ƒ^ƒ“‰Ÿ‰º
-  };
+  // const handleFollow = () => { // ï¿½uï¿½tï¿½Hï¿½ï¿½ï¿½[ï¿½vï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  // };
 
-  const handleReport = () => { // u’Ê•ñvƒ{ƒ^ƒ“‰Ÿ‰º
-    navigate('/report_con'); 
-  };
+  // const handleReport = () => { // ï¿½uï¿½Ê•ï¿½vï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  //   navigate('/report_con'); 
+  // };
 
 
   const inputStyle = {
@@ -46,9 +46,9 @@ const OtherUsers = () => {
   
         try {
           setIsLoading(true);
-          const response = await fetch(`http://localhost:8080/post/get/${id}`);
+          const response = await fetch(`http://54.163.169.153:8000/post/get/${id}`);
           if (!response.ok) {
-            throw new Error('“Še‚ÌŽæ“¾‚ÉŽ¸”s‚µ‚Ü‚µ‚½');
+            throw new Error('ï¿½ï¿½ï¿½eï¿½ÌŽæ“¾ï¿½ÉŽï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½');
           }
           const data = await response.json();
           setPosts(data.posts);
@@ -63,12 +63,12 @@ const OtherUsers = () => {
     }, [id]);
     
     const handlead1 = () => {
-      //ŠO•”ƒTƒCƒg‚Ö”ò‚Ô(V‚µ‚¢ƒ^ƒu‚Å)
+      //ï¿½Oï¿½ï¿½ï¿½Tï¿½Cï¿½gï¿½Ö”ï¿½ï¿½(ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½uï¿½ï¿½)
       window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yoshida.shtml', '_blank', 'noopener noreferrer')
     };
   
     const handlead2 = () => {
-      //ŠO•”ƒTƒCƒg‚Ö”ò‚Ô(V‚µ‚¢ƒ^ƒu‚Å)
+      //ï¿½Oï¿½ï¿½ï¿½Tï¿½Cï¿½gï¿½Ö”ï¿½ï¿½(ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½uï¿½ï¿½)
       window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_takeuchi.shtml', '_blank', 'noopener noreferrer')
     };
   return (
@@ -76,12 +76,12 @@ const OtherUsers = () => {
       <div className={styles.body}>
 
       <div className={styles.left}>
-        <button // uƒgƒbƒvƒy[ƒW‚Ö–ß‚évƒ{ƒ^ƒ“
+        <button // ï¿½uï¿½gï¿½bï¿½vï¿½yï¿½[ï¿½Wï¿½Ö–ß‚ï¿½vï¿½{ï¿½^ï¿½ï¿½
           className={styles.topButton}
           onClick={handleTop}
           style={inputStyle}
         >
-          ƒgƒbƒvƒy[ƒW‚Ö–ß‚é
+          ï¿½gï¿½bï¿½vï¿½yï¿½[ï¿½Wï¿½Ö–ß‚ï¿½
         </button>
 
         <div className={styles.advertisement}>
@@ -90,8 +90,8 @@ const OtherUsers = () => {
               onClick={handlead1}
             >
           <img
-            src={Left2Img} // LƒTƒ“ƒvƒ‹
-            alt="Left2Img" // ‘ã‘ÖƒeƒLƒXƒg
+            src={Left2Img} // ï¿½Lï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½
+            alt="Left2Img" // ï¿½ï¿½Öƒeï¿½Lï¿½Xï¿½g
           />
           </button>
         </div>
@@ -99,12 +99,12 @@ const OtherUsers = () => {
 
       <div className={styles.center}>
       {isLoading ? (
-            <div>“Ç‚Ýž‚Ý’†...</div> // ƒ[ƒfƒBƒ“ƒO’†‚Ì•\Ž¦
+            <div>ï¿½Ç‚Ýï¿½ï¿½Ý’ï¿½...</div> // ï¿½ï¿½ï¿½[ï¿½fï¿½Bï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Ì•\ï¿½ï¿½
           ) : posts.length === 0 ? (
-            <div>“Še‚ª‚ ‚è‚Ü‚¹‚ñ</div> // “Še‚ª‚È‚¢ê‡‚Ì•\Ž¦
+            <div>ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½</div> // ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Ì•\ï¿½ï¿½
           ) : (
             <>
-        <div className={styles.title}>{posts[0].name}‚Ìƒy[ƒW</div>
+        <div className={styles.title}>{posts[0].name}ï¿½Ìƒyï¿½[ï¿½W</div>
           <div className={styles.media}>
             {posts.map((post) => (
               <div key={post.id} className={styles.white}>           
@@ -112,7 +112,7 @@ const OtherUsers = () => {
                   <div className={styles.picture}>{post.image}</div>
                   
                   <div className={styles.info}>                 
-                    <div className={styles.comment}>{post.comment}ƒƒ“</div>
+                    <div className={styles.comment}>{post.comment}ï¿½ï¿½ï¿½ï¿½</div>
                   </div>
                 </div>
               </div> 
@@ -129,8 +129,8 @@ const OtherUsers = () => {
               onClick={handlead2}
             >
           <img
-            src={Right2Img} // LƒTƒ“ƒvƒ‹
-            alt="Right2Img" // ‘ã‘ÖƒeƒLƒXƒg
+            src={Right2Img} // ï¿½Lï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½
+            alt="Right2Img" // ï¿½ï¿½Öƒeï¿½Lï¿½Xï¿½g
           />
           </button>
         </div>

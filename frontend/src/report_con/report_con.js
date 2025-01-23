@@ -31,7 +31,7 @@ const ReportCon = () => {
   const handleok = async (reportuserid) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:8080/report/count', {
+      const response = await fetch('http://54.163.169.153:8000/report/count', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const ReportCon = () => {
     const fetchPost = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`http://localhost:8080/report/post?postid=${postId}`);
+        const response = await fetch(`http://54.163.169.153:8000/report/post?postid=${postId}`);
 
         if (!response.ok) {
           throw new Error('投稿の取得に失敗しました');

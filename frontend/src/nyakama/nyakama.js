@@ -31,7 +31,7 @@ const Nyakama = () => {
       if (!userid || !followedid) return;
     
       try {
-        const response = await fetch('http://localhost:8080/follow', {
+        const response = await fetch('http://54.163.169.153:8000/follow', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userid, followedid }),
@@ -61,7 +61,7 @@ const Nyakama = () => {
 
       try {
         setIsLoading(true);
-        const response = await fetch(`http://localhost:8080/followlist/${userid}`);
+        const response = await fetch(`http://54.163.169.153:8000/followlist/${userid}`);
         if (!response.ok) {
           throw new Error('※フォローリストの取得に失敗したワン');
         }
