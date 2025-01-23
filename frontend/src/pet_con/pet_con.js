@@ -30,12 +30,7 @@ const PetCon = () => {
           const fileBlob = formData.file;  // `File` オブジェクトを直接使用
           const fileName = formData.file.name; // ファイル名を取得
           formDataToSend.append('file', fileBlob, fileName);
-        }else{}
-        
-        // console.log("FormData entries:");
-        // for (let [key, value] of formDataToSend.entries()) {
-        //   console.log(`${key}: ${value}`);
-        // }
+        }
 
         try {
           const response = await fetch('https://neozero.metifie.com/userinfo/info/change', {

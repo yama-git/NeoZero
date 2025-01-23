@@ -45,7 +45,7 @@ const TopPage = () => {
     }
   }, [userid]);
 
-  const handleGood = (async (postId) => { //useCallback
+  const handleGood = useCallback(async (postId) => { 
     if (!userid || !postId) return;
 
     try {
