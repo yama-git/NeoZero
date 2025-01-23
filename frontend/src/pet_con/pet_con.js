@@ -21,18 +21,22 @@ const PetCon = () => {
   const handlepet = async () => { // 「OK」ボタン押下
         // ここで送信するデータをオブジェクトとして扱う
         const formDataToSend = new FormData();
+        
         formDataToSend.append('user_id', formData.user_id);
         formDataToSend.append('user_name', formData.user_name);
         formDataToSend.append('user_comment', formData.user_comment);
-        formDataToSend.append('file', fileInput.files[0]);
         
         if (formData.file) {
           const fileBlob = formData.file;  // `File` オブジェクトを直接使用
           const fileName = formData.file.name; // ファイル名を取得
-           
           formDataToSend.append('file', fileBlob, fileName);
-        }
-    
+        }else{}
+        
+        // console.log("FormData entries:");
+        // for (let [key, value] of formDataToSend.entries()) {
+        //   console.log(`${key}: ${value}`);
+        // }
+
         try {
           const response = await fetch('https://neozero.metifie.com/userinfo/info/change', {
             method: 'PUT',

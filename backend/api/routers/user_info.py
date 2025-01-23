@@ -87,7 +87,7 @@ async def ChangePetInfo(
     user_id: str = Form(None), 
     user_name: str = Form(None), #Query(None), 
     user_comment: str = Form(None), 
-    file: UploadFile = File(...)
+    file: UploadFile = File(None)
     ):# user_icon: str = Query(None)変更
 
     try:
