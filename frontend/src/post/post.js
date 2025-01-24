@@ -6,8 +6,6 @@ import Cookies from 'js-cookie';
 
 
 const Post = () => {
-  // //あとでuserIDをくっきーで保持できるようにする
-  // const userId = 'cbbb71ba-a084-405f-8120-c95432bd218a';
   const userId = Cookies.get('userid');
   const navigate = useNavigate();
 

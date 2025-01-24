@@ -14,12 +14,22 @@ const Deletion = () => {
   console.log("デリーとで受け取った",postId);
   const navigate = useNavigate(); // ページ遷移用
 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return '';
+  };
+
+  const userid = getCookie('userid');
+
+
   const handletop = () => { //「トップページ」ボタン押下 
     navigate('/top'); // トップページに移動
   };
   const handledeletion = async () => {
     try {
-      const response = await fetch(`https://neozero.metifie.com/post/delete?post_id=${postId}`, {
+      const response = await fetch(`https://neozero.metifie.com/post/delete?post_id=${postId}&user_id=${userid}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
