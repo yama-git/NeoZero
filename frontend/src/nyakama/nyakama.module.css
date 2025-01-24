@@ -85,12 +85,28 @@
     align-items: center; 
 }
 
-.photo{
+.photo {
     flex: 2;
-    height: 200px; /* 最大高さを設定 */
-    border: 1px solid #000; /* 枠線 */ 
+    height: 200px; /* 高さを指定 */
+    width: 200px; /* 幅を指定して正方形に */
+    border: 1px solid #000; /* 枠線 */
     margin: 10px;
+    display: flex; /* 子要素の配置用 */
+    justify-content: center; /* 子要素を中央に配置 */
+    align-items: center;
+    border-radius: 50%; /* 親要素も丸くする（補助的） */
+    overflow: hidden; /* 子要素がはみ出さないように */
 }
+
+.photo img {
+    max-width: 100%;
+    /* 親要素の幅に収める */
+    max-height: 100%;
+    /* 親要素の高さに収める */
+    object-fit: contain;
+    /* 縦横比を維持して全体をフィット */
+}
+
 
 .info{
     flex: 3;

@@ -4,6 +4,8 @@ import styles from './nyakama.module.css';
 import fontstyles from '../font/font.module.css';
 import Left1Img from '../image/Left1.png';
 import Right1Img from '../image/Right1.png';
+import Icondog from './icon/3.png';
+import Iconcat from './icon/4.png';
 
 const Nyakama = () => {
   const navigate = useNavigate();
@@ -86,7 +88,7 @@ const Nyakama = () => {
   if (isLoading) {
     return <div className={styles.loading}>読み込み中...</div>;
   }
-  
+
 
   if (error) {
     return <div className={styles.error}>エラー: {error}</div>;
@@ -114,14 +116,14 @@ const Nyakama = () => {
             トップページへ戻る
           </button>
           <div className={styles.advertisement}>
-          <button
-            className={styles.adbutton}
+            <button
+              className={styles.adbutton}
               onClick={handlead1}
             >
-            <img
-              src={Left1Img}
-              alt="Left1Img"
-            />
+              <img
+                src={Left1Img}
+                alt="Left1Img"
+              />
             </button>
           </div>
         </div>
@@ -130,7 +132,11 @@ const Nyakama = () => {
           <div className={styles.media}>
             {followlists.map((follow) => (
               <div key={follow.id} className={styles.white}>
-                <div className={styles.photo}>画像</div>
+                <div className={styles.photo}>
+                  <img
+                    src={Iconcat}
+                    alt="cat_icon"
+                  /></div>
                 <div className={styles.info}>
                   <div className={styles.detail}>
                     <button
@@ -159,14 +165,14 @@ const Nyakama = () => {
         </div>
         <div className={styles.right}>
           <div className={styles.advertisement2}>
-          <button
-            className={styles.adbutton}
+            <button
+              className={styles.adbutton}
               onClick={handlead2}
             >
-            <img
-              src={Right1Img}
-              alt="Right1Img"
-            />
+              <img
+                src={Right1Img}
+                alt="Right1Img"
+              />
             </button>
           </div>
         </div>
