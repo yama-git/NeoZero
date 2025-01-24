@@ -28,7 +28,10 @@ const Nyakama = () => {
   const userid = getCookie('userid');
 
   const handleReFollow = useCallback(async (followedid) => {
+    console.log(followedid)
       if (!userid || !followedid) return;
+
+      console.log(followedid)
     
       try {
         const response = await fetch('https://neozero.metifie.com/follow', {
@@ -36,13 +39,15 @@ const Nyakama = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userid, followedid }),
         });
-    
+
         if (!response.ok) {
           throw new Error('※フォローの更新に失敗したワン。');
         }
         const status = await response.json();
-        console.log(status);
+        // console.log(status);
+
         window.location.reload();
+
       } catch (error) {
         console.error('フォロー処理エラー:', error);
       }
@@ -66,7 +71,7 @@ const Nyakama = () => {
           throw new Error('※フォローリストの取得に失敗したワン');
         }
         const followListData = await response.json();
-        // console.log(followListData);
+        console.log('followListData',followListData);
         setFollows(followListData);
       } catch (error) {
         setError(error.message);
@@ -75,7 +80,7 @@ const Nyakama = () => {
       }
     };
 
-    fetchFollowList();
+    fetchFollowList(userid);
   }, [userid, handleReFollow]);
 
   if (isLoading) {
@@ -136,10 +141,13 @@ const Nyakama = () => {
                       {follow.name}
                     </button>
                     <button
-                      className={styles.refollowButton}
-                      onClick={() => handleReFollow(follow.id)}
-                      style={inputStyle}
-                    >
+                    className={styles.refollowButton}
+                    onClick={() => {
+                      console.log('フォロー解除',follow.follwedid);  // follow.id が正しく表示されるか確認
+                      handleReFollow(follow.follwedid);
+                    }}
+                    style={inputStyle}
+                  >
                       フォロー解除
                     </button>
                   </div>
