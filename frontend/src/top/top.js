@@ -258,8 +258,8 @@ const TopPage = () => {
                 <div className={styles.post}>
                   <div className={styles.picture}>
                     <img
-                      alt ={`${post.postimag}`} // 修正された部分
-                      // alt={`投稿 ${post.id}`}
+                      // alt ={`${post.postimag}`} // 修正された部分
+                      alt={`投稿 ${post.postimag}`}
                       className={styles.postImage}
                       onError={(e) => {
                         e.target.src = '/placeholder.png';
@@ -295,7 +295,10 @@ const TopPage = () => {
                       </button>
                     </div>
 
-                    <div className={styles.comment}>{post.comment}ニャン</div>
+                    <div className={styles.comment}>
+                      {post.title}わん<br></br>
+                      {post.comment}ニャン
+                      </div>
                     <button
                       className={styles.reportButton}
                       onClick={() => handleReport(post.id)}
