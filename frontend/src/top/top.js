@@ -5,7 +5,7 @@ import fontstyles from '../font/font.module.css';
 import pawloverslogoImg from './pawlovers.png';
 import TopleftImg from '../image/Topleft.png';
 import ToprightImg from '../image/Topright.png';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const TopPage = () => {
   const navigate = useNavigate();
@@ -258,8 +258,8 @@ const TopPage = () => {
                 <div className={styles.post}>
                   <div className={styles.picture}>
                     <img
-                      src={`https://neozero.metifie.com/${post.image_url}`} // 修正された部分
-                      alt={`投稿 ${post.id}`}
+                      alt ={`${post.postimag}`} // 修正された部分
+                      // alt={`投稿 ${post.id}`}
                       className={styles.postImage}
                       onError={(e) => {
                         e.target.src = '/placeholder.png';
