@@ -85,7 +85,7 @@ const MyPage = () => {
     <div className={styles.white} key={post.id}>
       <div className={styles.post}>
         <div className={styles.picture}>
-          <img src={post.postimage} alt="投稿画像" />
+          <img src={post.image} alt="投稿画像" width="400" height="340"/>
         </div>
         <div className={styles.info}>
           <button
@@ -96,11 +96,12 @@ const MyPage = () => {
             投稿消去
           </button>
           <div className={styles.push}>
-            <div className={styles.good}>いいね: {post.goodcount}</div>
-            <div className={styles.money}>スパチャ</div>
+            <div className={styles.eraseButton}>いいね: {post.goodcount}</div>
+            <div className={styles.eraseButton}>スパチャ</div>
           </div>
           <div className={styles.comment}>
-            <p>{post.caption}</p>
+            <p>{post.title}</p>
+            <p>{post.comment}</p>
           </div>
         </div>
       </div>
