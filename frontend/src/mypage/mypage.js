@@ -90,7 +90,7 @@ const MyPage = () => {
         <div className={styles.info}>
           <button
             className={styles.eraseButton}
-            onClick={() => handleErase(post.postId)}
+            onClick={() => handleErase(post.post_id)}
             style={inputStyle}
           >
             投稿消去
