@@ -271,6 +271,7 @@ const TopPage = () => {
                   </div>
 
                   <div className={styles.info}>
+                    {!post.userid == userid &&(
                     <button
                       className={styles.followButton}
                       onClick={() => handleFollow(post.userid)}
@@ -278,8 +279,10 @@ const TopPage = () => {
                     >
                       {post.isFollowed ? 'フォロー中' : 'フォロー'}
                     </button>
+                     )};
 
                     <div className={styles.push}>
+                     
                       <button
                         className={styles.good}
                         onClick={() => handleGood(post.id)} //post.idを取得
