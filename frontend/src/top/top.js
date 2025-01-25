@@ -181,7 +181,7 @@ const TopPage = () => {
         const data = await response.json();
         // console.log(data)
         const postsWithStatuses = await Promise.all(
-          data.posts.map(async (post) => {
+          data.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.id);
             const followStatus = await fetchFollowStatus(post.id);
             return {
@@ -301,8 +301,8 @@ const TopPage = () => {
                     </div>
 
                     <div className={styles.comment}>
-                      <b>{post.title}わん<br></br></b>
-                      <br></br>
+                      // <b>{post.title}わん<br></br></b>
+                      // <br></br>
                       {post.comment}ニャン
                     </div>
                     <button
