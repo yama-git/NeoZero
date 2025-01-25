@@ -78,6 +78,7 @@ async def GetNewPost():
     if posts == None:
         posts = -1
     # 各投稿について画像URLを取得し、S3から画像を取得
+    results = []
     for post in posts:
         image_url = post.image  # 投稿に関連する画像URL
         if image_url == None:
@@ -95,7 +96,20 @@ async def GetNewPost():
             #     base64_image_data = base64.b64encode(image_data).decode('utf-8')
             # except ClientError as e:
             #     s3_response = -1
-    return posts # base64_image_data
+        
+        # usernameも取得し、必要な情報だけを配列で返す 
+        user = session.query(models.User).\
+                filter(models.User.id == post.user_id).\
+                first()  
+        post_data = {
+                "id": post.id,
+                "comment": post.caption,
+                "userid": post.user_id,
+                "image": base64_image_data,  # わからんけど多分こう？
+                "name": user.name  # ユーザー名
+        }
+        results.append(post_data)
+    return results # base64_image_data
 
 ## DeletePost １つの投稿を削除
 async def DeletePost(post_id):#user_id, #models.Post.user_id == user_id, 
