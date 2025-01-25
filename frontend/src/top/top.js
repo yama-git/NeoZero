@@ -65,7 +65,7 @@ const TopPage = () => {
       // 現在の投稿のいいね状態を反転させる（0 → 1 または 1 → 0）
       setPosts(prevPosts => {
         return prevPosts.map(post => {
-          if (post.id === postId) {
+          if (post.post_id === postId) {
             if (post.isLiked === 1) {
               return { ...post, isLiked: 0 };  // いいねしていれば、いいねを解除
             } else {
