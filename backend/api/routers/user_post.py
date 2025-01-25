@@ -75,19 +75,18 @@ async def Post(user_id: str = Form(None), title: str = Form(None), caption: str 
 @router.get(path="/post/get/{user_id}")
 async def GetOnesPost(user_id: str):
     result = await handle_db.GetOnesPost(user_id)
-    if result == -1:
-        return -1
-    posts = [
-        {
-            "postId":post.id,
-            "title": post.title,
-            "caption": post.caption,
-            "goodcount": post.goodcount,
-            "postimage": post.image
-        }
-        for post in result
-    ]
-    return {"posts": posts}
+    return result
+    # posts = [
+    #     {
+    #         "postId":post.id,
+    #         "title": post.title,
+    #         "caption": post.caption,
+    #         "goodcount": post.goodcount,
+    #         "postimage": post.image
+    #     }
+    #     for post in result
+    # ]
+    # return {"posts": posts}
     # GetPostImageを呼び出す
     # if result == -1:
     #     return -1
