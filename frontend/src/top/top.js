@@ -61,7 +61,7 @@ const TopPage = () => {
         throw new Error('※いいねの更新に失敗したニャン。');
       }
 
-      // window.location.reload();
+      window.location.reload();
       // 現在の投稿のいいね状態を反転させる（0 → 1 または 1 → 0）
       setPosts(prevPosts => {
         return prevPosts.map(post => {
@@ -115,7 +115,7 @@ const TopPage = () => {
         throw new Error('※フォローの更新に失敗したニャン。');
       }
 
-      // window.location.reload();
+      window.location.reload();
       // フォロー状態の反転処理
       setPosts((prevPosts) => {
         return prevPosts.map((post) => {
@@ -182,7 +182,7 @@ const TopPage = () => {
         const data = await response.json();
         console.log(posts.image)
         const postsWithStatuses = await Promise.all(
-          data.map(async (post) => {
+          data.posts.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.id);
             const followStatus = await fetchFollowStatus(post.id);
             return {
@@ -272,7 +272,6 @@ const TopPage = () => {
                   </div>
 
                   <div className={styles.info}>
-                    {!post.userid == userid &&(
                     <button
                       className={styles.followButton}
                       onClick={() => handleFollow(post.userid)}
@@ -280,11 +279,8 @@ const TopPage = () => {
                     >
                       {post.isFollowed ? 'フォロー中' : 'フォロー'}
                     </button>
-                     )};
-
 
                     <div className={styles.push}>
-                     
                       <button
                         className={styles.good}
                         onClick={() => handleGood(post.id)} //post.idを取得
@@ -303,8 +299,8 @@ const TopPage = () => {
                     </div>
 
                     <div className={styles.comment}>
-                      // <b>{post.title}わん<br></br></b>
-                      // <br></br>
+                      <b>{post.title}わん<br></br></b>
+                      <br></br>
                       {post.comment}ニャン
                     </div>
                     <button
