@@ -108,6 +108,7 @@ const TopPage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid, followedid }),
+        
       });
 
       if (!response.ok) {
@@ -179,7 +180,7 @@ const TopPage = () => {
           throw new Error('※投稿の取得に失敗したニャン。');
         }
         const data = await response.json();
-        // console.log(data)
+        console.log(posts.image)
         const postsWithStatuses = await Promise.all(
           data.posts.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.id);
@@ -260,9 +261,9 @@ const TopPage = () => {
                   <div className={styles.picture}>
                     <img
                       // alt ={`${post.postimag}`} // 修正された部分
-                      // alt={`投稿 ${post.postimag}`}
+                      //alt={`投稿 ${post.image}`}
                       // className={styles.postImage}
-                      src={`data:image/png;base64,${post.postimag}`} 
+                      src={post.image} 
                       onError={(e) => {
                         e.target.src = '/placeholder.png';
                         console.error('※画像の読み込みに失敗したニャン。');
@@ -271,6 +272,7 @@ const TopPage = () => {
                   </div>
 
                   <div className={styles.info}>
+                    {!post.userid == userid &&(
                     <button
                       className={styles.followButton}
                       onClick={() => handleFollow(post.userid)}
@@ -278,6 +280,8 @@ const TopPage = () => {
                     >
                       {post.isFollowed ? 'フォロー中' : 'フォロー'}
                     </button>
+                     )};
+
 
                     <div className={styles.push}>
                       <button
