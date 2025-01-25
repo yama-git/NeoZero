@@ -183,8 +183,8 @@ const TopPage = () => {
         console.log(posts.image)
         const postsWithStatuses = await Promise.all(
           data.posts.map(async (post) => {
-            const goodStatus = await fetchGoodStatus(post.id);
-            const followStatus = await fetchFollowStatus(post.id);
+            const goodStatus = await fetchGoodStatus(post.post_id);
+            const followStatus = await fetchFollowStatus(post.post_id);
             return {
               ...post,
               isLiked: goodStatus,
@@ -255,7 +255,7 @@ const TopPage = () => {
 
           <div className={styles.media}>
             {posts.map((post) => (
-              <div key={post.id} className={styles.white}>
+              <div key={post.post_id} className={styles.white}>
                 <div className={styles.post}>
                   <b>{post.name}<br></br></b>
                   <div className={styles.picture}>
@@ -272,18 +272,21 @@ const TopPage = () => {
                   </div>
 
                   <div className={styles.info}>
+                   {post.user_id !== userid && (
                     <button
                       className={styles.followButton}
-                      onClick={() => handleFollow(post.userid)}
+                      onClick={() => handleFollow(post.user_id)}
                       style={inputStyle}
                     >
                       {post.isFollowed ? 'フォロー中' : 'フォロー'}
                     </button>
+                      )
+                    }
 
                     <div className={styles.push}>
                       <button
                         className={styles.good}
-                        onClick={() => handleGood(post.id)} //post.idを取得
+                        onClick={() => handleGood(post.post_id)} //post.idを取得
                         style={inputStyle}
                       >
                         {post.isLiked ? 'いいね済み' : 'いいね'}
@@ -305,7 +308,7 @@ const TopPage = () => {
                     </div>
                     <button
                       className={styles.reportButton}
-                      onClick={() => handleReport(post.id)}
+                      onClick={() => handleReport(post.user_id)}
                       style={inputStyle}
                     >
                       通報
