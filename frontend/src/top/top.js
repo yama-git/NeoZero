@@ -63,8 +63,8 @@ const TopPage = () => {
 
       // window.location.reload();
       // 現在の投稿のいいね状態を反転させる（0 → 1 または 1 → 0）
-      setPosts(prevPosts => {
-        return prevPosts.map(post => {
+      setPosts((prevPosts) => {
+        return prevPosts.map((post) => {
           if (post.post_id === postId) {
             if (post.isLiked === 1) {
               return { ...post, isLiked: 0 };  // いいねしていれば、いいねを解除
@@ -121,7 +121,7 @@ const TopPage = () => {
         return prevPosts.map((post) => {
 
           // 同じユーザーが投稿した他の投稿にも反映
-          if (post.userid === followedid) {
+          if (post.user_id === followedid) {
             return {
               ...post,
               isFollowed: post.isFollowed === 0 ? 1 : 0, // フォロー状態を反転
