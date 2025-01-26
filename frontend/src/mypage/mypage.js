@@ -9,24 +9,27 @@ const MyPage = () => {
   const [posts, setPosts] = useState([]); // 投稿データを格納するためのstate
   const navigate = useNavigate(); // ページ遷移用
 
-  // user_idは固定 →　クッキーから取得
-  const userId = Cookies.get('userid'); 
-
   useEffect(() => {
-    const fetchPosts = async (userid) => {
+    // user_idは固定 →　クッキーから取得
+    const userId = Cookies.get('userid'); 
+    const fetchPosts = async () => {
+      // console.log("渡したId", userId)
       try {
         const response = await fetch(`https://neozero.metifie.com/post/get/${userId}`);
         const data = await response.json();
-        if (data && data.posts) {
-          setPosts(data.posts); // 取得した投稿データをstateに格納
-        }
+        console.log("data", data)
+        console.log("data.posts", data.posts)
+        // if (data && data.posts) {
+          setPosts(data); // 取得した投稿データをstateに格納
+          console.log("posts", posts)
+       // }
       } catch (error) {
         console.error("投稿データの取得に失敗しました", error);
       }
     };
 
     fetchPosts();
-  }, [userId]); // userIdが変更されるたびに再実行
+  }, []); // userIdが変更されるたびに再実行
 
   const handleTop = () => { // 「トップページへ戻る」ボタン押下
     navigate('/top'); // トップページに移動
