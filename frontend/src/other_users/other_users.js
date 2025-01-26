@@ -48,7 +48,7 @@ const OtherUsers = () => {
           setIsLoading(true);
           const response = await fetch(`https://neozero.metifie.com/post/get/${id}`);
           if (!response.ok) {
-            throw new Error('���e�̎擾�Ɏ��s���܂���');
+            throw new Error('投稿の取得に失敗しました');
           }
           const data = await response.json();
           setPosts(data.posts);
@@ -81,7 +81,7 @@ const OtherUsers = () => {
           onClick={handleTop}
           style={inputStyle}
         >
-          �g�b�v�y�[�W�֖߂�
+          トップページへ戻る
         </button>
 
         <div className={styles.advertisement}>
@@ -99,12 +99,12 @@ const OtherUsers = () => {
 
       <div className={styles.center}>
       {isLoading ? (
-            <div>�ǂݍ��ݒ�...</div> // ���[�f�B���O���̕\��
+            <div>読み込み中...</div> // ���[�f�B���O���̕\��
           ) : posts.length === 0 ? (
-            <div>���e������܂���</div> // ���e���Ȃ��ꍇ�̕\��
+            <div>投稿がありません</div> // ���e���Ȃ��ꍇ�̕\��
           ) : (
             <>
-        <div className={styles.title}>{posts[0].name}�̃y�[�W</div>
+        <div className={styles.title}>{posts[0].name}のページ</div>
           <div className={styles.media}>
             {posts.map((post) => (
               <div key={post.id} className={styles.white}>           
@@ -112,7 +112,7 @@ const OtherUsers = () => {
                   <div className={styles.picture}>{post.image}</div>
                   
                   <div className={styles.info}>                 
-                    <div className={styles.comment}>{post.comment}����</div>
+                    <div className={styles.comment}>{post.comment}ワン</div>
                   </div>
                 </div>
               </div> 
