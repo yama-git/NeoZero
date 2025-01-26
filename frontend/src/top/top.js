@@ -66,11 +66,10 @@ const TopPage = () => {
       setPosts((prevPosts) => {
         return prevPosts.map((post) => {
           if (post.post_id === postId) {
-            if (post.isLiked === 1) {
-              return { ...post, isLiked: 0 };  // いいねしていれば、いいねを解除
-            } else {
-              return { ...post, isLiked: 1 };  // いいねしていなければ、いいねする
-            }
+            return {
+              ...post,
+              isLiked: post.isLiked === 1 ? 0 : 1,  // 1 → 0, 0 → 1
+            };
           }
           return post;
         });
@@ -311,7 +310,7 @@ const TopPage = () => {
                     </div>
                     <button
                       className={styles.reportButton}
-                      onClick={() => handleReport(post.user_id)}
+                      onClick={() => handleReport(post.post_id)}
                       style={inputStyle}
                     >
                       通報
