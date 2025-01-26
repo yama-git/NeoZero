@@ -61,11 +61,11 @@ const TopPage = () => {
         throw new Error('※いいねの更新に失敗したニャン。');
       }
 
-      window.location.reload();
+      // window.location.reload();
       // 現在の投稿のいいね状態を反転させる（0 → 1 または 1 → 0）
-      setPosts(prevPosts => {
-        return prevPosts.map(post => {
-          if (post.id === postId) {
+      setPosts((prevPosts) => {
+        return prevPosts.map((post) => {
+          if (post.post_id === postId) {
             if (post.isLiked === 1) {
               return { ...post, isLiked: 0 };  // いいねしていれば、いいねを解除
             } else {
@@ -115,13 +115,13 @@ const TopPage = () => {
         throw new Error('※フォローの更新に失敗したニャン。');
       }
 
-      window.location.reload();
+      // window.location.reload();
       // フォロー状態の反転処理
       setPosts((prevPosts) => {
         return prevPosts.map((post) => {
 
           // 同じユーザーが投稿した他の投稿にも反映
-          if (post.userid === followedid) {
+          if (post.user_id === followedid) {
             return {
               ...post,
               isFollowed: post.isFollowed === 0 ? 1 : 0, // フォロー状態を反転
@@ -182,7 +182,7 @@ const TopPage = () => {
         const data = await response.json();
         console.log(posts.image)
         const postsWithStatuses = await Promise.all(
-          data.posts.map(async (post) => {
+          data.map(async (post) => {
             const goodStatus = await fetchGoodStatus(post.post_id);
             const followStatus = await fetchFollowStatus(post.post_id);
             return {
@@ -203,7 +203,8 @@ const TopPage = () => {
     };
 
     fetchPosts();
-  }, [userid, fetchGoodStatus, fetchFollowStatus]); // 依存配列にfetchGoodStatusとfetchFollowStatusを追加
+  }, [userid]);
+  // }, [userid, fetchGoodStatus, fetchFollowStatus]); // 依存配列にfetchGoodStatusとfetchFollowStatusを追加
 
   if (isLoading) {
     return <div className={styles.loading}>読み込み中...</div>;
@@ -302,7 +303,9 @@ const TopPage = () => {
                     </div>
 
                     <div className={styles.comment}>
-                      <b>{post.title}わん<br></br></b>
+                      <b>{post.name}ちゃん<br></br></b>
+                      <br></br>
+                      <b>「{post.title}わん」<br></br></b>
                       <br></br>
                       {post.comment}ニャン
                     </div>
