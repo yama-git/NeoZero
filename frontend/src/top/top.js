@@ -257,7 +257,6 @@ const TopPage = () => {
             {posts.map((post) => (
               <div key={post.post_id} className={styles.white}>
                 <div className={styles.post}>
-                  <b>{post.name}<br></br></b>
                   <div className={styles.picture}>
                     <img
                       // alt ={`${post.postimag}`} // 修正された部分
