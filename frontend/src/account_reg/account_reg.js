@@ -16,7 +16,7 @@ const AccountReg = () => {
 
   const handleOk =async () => {
     const passwordRegex = /^[a-zA-Z0-9]{8,16}$/; // パスワードの形式チェック
-    const emailregex = /^[a-zA-Z0-9]{4,10}@gmail\.com$/;
+    const emailregex = /^.+@.+\..+$/;
     
 
     if (!email || !name || !password || !passwordConfirm) {
