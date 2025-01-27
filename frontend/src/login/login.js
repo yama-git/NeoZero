@@ -32,7 +32,7 @@ const Login = () => {
     const passwordRegex = /^[a-zA-Z0-9]{8,16}$/;
     return passwordRegex.test(password);
   };
-  const emailregex = /^[a-zA-Z0-9]{4,10}@gmail\.com$/;
+  const emailregex = /^.+@.+\..+$/;
     
   const handleLogin = async () => {
     if (!email) { // メールアドレスが未入力のとき
