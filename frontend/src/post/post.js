@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import styles from './post.module.css';
 import fontstyles from '../font/font.module.css';
 import Cookies from 'js-cookie';
+const block_post = false;
 
 
 const Post = () => {
   const userId = Cookies.get('userid');
   const navigate = useNavigate();
+  
 
   const [formData, setFormData] = useState({
     userid : userId,
@@ -73,13 +75,15 @@ const formDataMap = new Map();
 fd.forEach((value, key) => {
   formDataMap.set(key, value);
 });
-
 // Map の内容を表示
 formDataMap.forEach((value, key) => {
   console.log(key, value);
 });
-
+    if (block_post !== false) {
+      return;
+    } 
     try {
+      block_post = true;
       const response = await fetch('https://neozero.metifie.com/post', {
         method: 'POST',
         body: fd,
