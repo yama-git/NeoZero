@@ -64,12 +64,14 @@ const OtherUsers = () => {
     
     const handlead1 = () => {
       //�O���T�C�g�֔��(�V�����^�u��)
-      window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yoshida.shtml', '_blank', 'noopener noreferrer')
+      //window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_yoshida.shtml', '_blank', 'noopener noreferrer')
+      window.open('https://anisupo.jimdofree.com/', '_blank', 'noopener noreferrer')
     };
   
     const handlead2 = () => {
       //�O���T�C�g�֔��(�V�����^�u��)
-      window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_takeuchi.shtml', '_blank', 'noopener noreferrer')
+      //window.open('https://www.info.kochi-tech.ac.jp/faculty_members/profile_takeuchi.shtml', '_blank', 'noopener noreferrer')
+      window.open('https://anisupo.jimdofree.com/', '_blank', 'noopener noreferrer')
     };
   return (
     <div className={fontstyles.fontFamily}>
