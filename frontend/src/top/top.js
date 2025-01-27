@@ -149,7 +149,7 @@ const TopPage = () => {
 
   const handlesuperchat = () => {
     //外部サイトへ飛ぶ(新しいタブで)
-    window.open('https://www.kochi-tech.ac.jp/', '_blank', 'noopener noreferrer')
+    window.open('https://buy.stripe.com/test_6oEdQVahC6wN5Ko5kn', '_blank', 'noopener noreferrer')
   };
 
   const inputStyle = {
