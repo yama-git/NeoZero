@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import styles from './post.module.css';
 import fontstyles from '../font/font.module.css';
 import Cookies from 'js-cookie';
-// const block_post = false;
+const block_post = false;
 
 
 const Post = () => {
   const userId = Cookies.get('userid');
   const navigate = useNavigate();
-  const block_post = false;
+  // const block_post = false;
   
 
   const [formData, setFormData] = useState({
